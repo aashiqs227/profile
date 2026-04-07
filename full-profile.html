@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aashiq Siddik — Full Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --transition: 0.35s ease; }
+
+  [data-theme="dark"] {
+    --bg: #08080A; --bg-card: #16161A; --bg-card-hover: #1C1C22;
+    --border: #26262E; --border-light: #32323C;
+    --text: #EAEAE8; --text-mid: #B0B0B8; --text-muted: #6E6E7A;
+    --accent: #E8C46C; --accent-dim: rgba(232,196,108,0.08); --accent-mid: rgba(232,196,108,0.18);
+    --nav-bg: rgba(8,8,10,0.85); --toggle-bg: #26262E; --toggle-dot: #E8C46C;
+  }
+
+  [data-theme="light"] {
+    --bg: #F8F7F4; --bg-card: #FFFFFF; --bg-card-hover: #F0EFEC;
+    --border: #DDD9D0; --border-light: #C8C4BC;
+    --text: #1A1A1A; --text-mid: #4A4A4A; --text-muted: #7A7A7A;
+    --accent: #A67C00; --accent-dim: rgba(166,124,0,0.06); --accent-mid: rgba(166,124,0,0.15);
+    --nav-bg: rgba(248,247,244,0.9); --toggle-bg: #DDD9D0; --toggle-dot: #A67C00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Outfit', sans-serif; line-height: 1.7;
+    overflow-x: hidden; font-weight: 300;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .grain {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 9999; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  [data-theme="light"] .grain { opacity: 0.015; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 36px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--nav-bg); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border); padding: 14px 0;
+    transition: background var(--transition), border var(--transition);
+  }
+
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+
+  .nav-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--text); text-decoration: none; transition: color var(--transition); }
+  .nav-name:hover { color: var(--accent); }
+
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+
+  .nav-links a {
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text-muted);
+    text-decoration: none; transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .theme-toggle {
+    width: 44px; height: 24px; background: var(--toggle-bg);
+    border-radius: 12px; position: relative; cursor: pointer;
+    border: none; transition: background var(--transition); flex-shrink: 0;
+  }
+
+  .theme-toggle::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--toggle-dot);
+    transition: transform var(--transition), background var(--transition);
+  }
+
+  [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
+
+  .toggle-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 11px; line-height: 1; }
+  .toggle-moon { left: 6px; }
+  .toggle-sun { right: 5px; }
+  [data-theme="dark"] .toggle-sun { opacity: 0.3; }
+  [data-theme="light"] .toggle-moon { opacity: 0.3; }
+
+  /* ── Page Header ── */
+  .page-header { padding: 140px 0 60px; }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--accent); text-decoration: none;
+    display: inline-block; margin-bottom: 24px;
+    transition: opacity 0.3s;
+  }
+
+  .back-link:hover { opacity: 0.7; }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px); font-weight: 400; margin-bottom: 12px;
+  }
+
+  .page-header p { font-size: 16px; color: var(--text-mid); max-width: 620px; }
+
+  .divider { height: 1px; background: var(--border); transition: background var(--transition); }
+
+  section { padding: 60px 0; }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+
+  section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 400; margin-bottom: 20px;
+  }
+
+  /* ── Timeline ── */
+  .timeline { position: relative; padding-left: 28px; }
+
+  .timeline::before {
+    content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border-light); transition: background var(--transition);
+  }
+
+  .tl-item { position: relative; padding-bottom: 32px; }
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-item::before {
+    content: ''; position: absolute; left: -25px; top: 7px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    transition: border-color var(--transition);
+  }
+
+  .tl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--accent); letter-spacing: 1px; margin-bottom: 4px;
+  }
+
+  .tl-role { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .tl-company { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+
+  .tl-bullets { list-style: none; padding: 0; }
+
+  .tl-bullets li {
+    font-size: 13px; color: var(--text-muted); line-height: 1.65;
+    padding-left: 16px; position: relative; margin-bottom: 5px;
+  }
+
+  .tl-bullets li::before {
+    content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700;
+  }
+
+  /* ── Cert Grid ── */
+  .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .cert-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px; transition: all var(--transition);
+  }
+
+  .cert-item h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .cert-issuer { font-size: 12px; color: var(--accent); margin-bottom: 2px; }
+  .cert-date { font-size: 11px; color: var(--text-muted); }
+
+  /* ── Education ── */
+  .edu-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: all var(--transition);
+  }
+
+  .edu-item h4 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .edu-school { font-size: 14px; color: var(--accent); margin-bottom: 4px; }
+  .edu-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .edu-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .edu-activities { font-size: 12px; color: var(--text-mid); margin-top: 8px; font-weight: 500; }
+
+  /* ── Volunteer ── */
+  .vol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .vol-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; transition: all var(--transition);
+  }
+
+  .vol-item h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .vol-org { font-size: 12px; color: var(--accent); margin-bottom: 2px; }
+  .vol-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+  .vol-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 60px 0 40px; text-align: center;
+    border-top: 1px solid var(--border); transition: border var(--transition);
+  }
+
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; }
+
+  .footer-links a {
+    font-size: 14px; color: var(--accent); text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .footer-links a:hover { opacity: 0.7; }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .page-header { padding: 100px 0 40px; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .vol-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav>
+  <div class="container">
+    <a href="index.html" class="nav-name">Aashiq Siddik</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certs">Certifications</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#volunteer">Volunteering</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="toggle-icon toggle-moon">🌙</span>
+        <span class="toggle-icon toggle-sun">☀️</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+    <h1>Full Profile</h1>
+    <p>The complete picture — every role, certification, education detail, and volunteer contribution that shaped who I am professionally.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FULL EXPERIENCE -->
+  <section id="experience">
+    <div class="section-eyebrow">Complete Career History</div>
+    <h2>Experience</h2>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-date">SEP 2024 &mdash; PRESENT</div>
+        <div class="tl-role">Digital Marketing Specialist</div>
+        <div class="tl-company">Save Max Real Estate &middot; Mississauga, ON &middot; Full-time</div>
+        <ul class="tl-bullets">
+          <li>Led comprehensive multi-channel marketing campaigns generating qualified leads for high-value real estate projects and resale properties</li>
+          <li>Reduced cost-per-lead by 20% through effective audience segmentation and budget reallocation for Google Ads and Meta Ads</li>
+          <li>Developed and optimized landing pages on Hostinger with custom Zapier integrations to streamline lead data into CRM systems</li>
+          <li>Boosted brand visibility with trend-driven TikTok and Instagram Reels content, increasing audience engagement and reach</li>
+          <li>Conducted digital training workshops for realtors on Google Ads, LinkedIn, and CRM platforms</li>
+          <li>Coordinated and marketed major events including the Dubai Real Estate Expo</li>
+          <li>Implemented automation workflows using Zapier for efficient lead capture and CRM routing</li>
+          <li>Monthly lead campaign performance reviews with agents analyzing lead quality, creative performance, and cost per lead</li>
+          <li>Primary contact for all marketing efforts for agent and franchise partners, coordinating with design, videography, and media teams</li>
+          <li>Major role in developing the new commercial real estate division — website, social media, lead gen, and content</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">JAN 2023 &mdash; SEP 2024</div>
+        <div class="tl-role">Digital Marketing Specialist</div>
+        <div class="tl-company">Everything Optical (Team ETO) &middot; Markham, ON &middot; Full-time, Hybrid</div>
+        <ul class="tl-bullets">
+          <li>Strategized, built, and deployed targeted email marketing campaigns</li>
+          <li>Managed the e-commerce website development project collaborating with internal and external stakeholders</li>
+          <li>Established KPIs and benchmarks to track performance across social and email channels</li>
+          <li>Developed and maintained a showcase website for the parent company on Wix</li>
+          <li>Provided design for print and digital using the Adobe suite</li>
+          <li>Executed multilingual paid campaigns (English, Spanish, French) across 3 regions generating 200+ leads and 100% social follower growth</li>
+          <li>Developed and presented campaign performance and site data reports to management with optimization recommendations</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">FEB 2022 &mdash; AUG 2024</div>
+        <div class="tl-role">Sales Associate</div>
+        <div class="tl-company">The Home Depot &middot; Toronto, ON &middot; Part-time</div>
+        <ul class="tl-bullets">
+          <li>Assisted customers in locating products and providing guidance on DIY projects within Kitchen and Bath</li>
+          <li>Trained and licensed to operate reach truck and order picker machinery</li>
+          <li>Maintained department stock levels and submitted inventory reports to supervisors</li>
+          <li>Assisted in sales of Home Depot credit services and generated leads for financing offerings</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">FEB 2020 &mdash; NOV 2021</div>
+        <div class="tl-role">Digital Marketing Executive</div>
+        <div class="tl-company">Global Choice Marketing &middot; Colombo &middot; Full-time</div>
+        <ul class="tl-bullets">
+          <li>Contributed to business strategy formulation alongside both managing partners</li>
+          <li>Liaised between freelancers and clients to ensure needs were met for campaign material</li>
+          <li>Developed monthly content including graphic design using Adobe suite for multiple brands</li>
+          <li>Improved clients' digital popularity through organic and paid growth strategies</li>
+          <li>Executed email marketing campaigns through Mailchimp and Constant Contact</li>
+          <li>Contributed to WordPress web development projects in a project manager and SEO capacity</li>
+          <li>Signed 4 new clients for a software solution through email marketing initiatives</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">MAY 2019 &mdash; JAN 2020</div>
+        <div class="tl-role">Digital Content Specialist</div>
+        <div class="tl-company">Media Monkey &middot; Colombo &middot; Full-time</div>
+        <ul class="tl-bullets">
+          <li>Ideation and creation of digital content for client social media handles</li>
+          <li>Managed client platforms and provided monthly performance reports benchmarked against industry</li>
+          <li>Provided English translation and approved copy on video scripts and print material</li>
+          <li>Created blog content resulting in 500+ unique views on average per blog</li>
+          <li>Provided hosting services for a food review sub-brand (Cake Katha)</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">SEP 2018 &mdash; APR 2019</div>
+        <div class="tl-role">Social Media Trainee</div>
+        <div class="tl-company">Seven Media Group &middot; Colombo &middot; Full-time</div>
+        <ul class="tl-bullets">
+          <li>Developed content and guided graphics team on content creation and brand standards</li>
+          <li>Managed multiple clients' social media accounts including publishing, community management, and reporting</li>
+          <li>Proposed additional campaigns to clients outside of retainer to increase organization revenue</li>
+          <li>Actively involved with the creative team for campaign ideation in sales efforts</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">JAN 2017 &mdash; SEP 2018</div>
+        <div class="tl-role">Customer Service Executive</div>
+        <div class="tl-company">Global Choice Marketing &middot; Colombo &middot; Part-time</div>
+        <ul class="tl-bullets">
+          <li>Multi-tasked between inbound and outbound calls as well as managed email queues</li>
+          <li>Communicated with potential clients interested in purchasing property and matched them with agents</li>
+          <li>Negotiated with clients and agents to accommodate both parties' availability for property showings</li>
+          <li>Ensured customer satisfaction throughout the entire customer journey</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <div class="section-eyebrow">Certifications & Licenses</div>
+    <h2>Professional Development</h2>
+
+    <div class="cert-grid">
+      <div class="cert-item">
+        <h4>AI Fluency Framework & Foundations</h4>
+        <div class="cert-issuer">Anthropic</div>
+        <div class="cert-date">Issued Mar 2026</div>
+      </div>
+      <div class="cert-item">
+        <h4>Claude Code in Action</h4>
+        <div class="cert-issuer">Anthropic</div>
+        <div class="cert-date">Issued Mar 2026</div>
+      </div>
+      <div class="cert-item">
+        <h4>Mastering Project Management with Asana</h4>
+        <div class="cert-issuer">LinkedIn</div>
+        <div class="cert-date">Issued Aug 2024</div>
+      </div>
+      <div class="cert-item">
+        <h4>The Ultimate Email Marketing Guide</h4>
+        <div class="cert-issuer">Semrush</div>
+        <div class="cert-date">Issued Jun 2024</div>
+      </div>
+      <div class="cert-item">
+        <h4>SEO Crash Course with Brian Dean</h4>
+        <div class="cert-issuer">Semrush</div>
+        <div class="cert-date">Issued Jun 2024</div>
+      </div>
+      <div class="cert-item">
+        <h4>Business Analytics: Marketing Data</h4>
+        <div class="cert-issuer">LinkedIn</div>
+        <div class="cert-date">Issued Dec 2023</div>
+      </div>
+      <div class="cert-item">
+        <h4>Verified International Academic Qualifications</h4>
+        <div class="cert-issuer">World Education Services</div>
+        <div class="cert-date">Issued Nov 2023</div>
+      </div>
+      <div class="cert-item">
+        <h4>Market Research Foundations</h4>
+        <div class="cert-issuer">LinkedIn</div>
+        <div class="cert-date">Issued Apr 2023</div>
+      </div>
+      <div class="cert-item">
+        <h4>Top 10% Worldwide</h4>
+        <div class="cert-issuer">Canvas Credentials (Badgr)</div>
+        <div class="cert-date">Issued Apr 2023</div>
+      </div>
+      <div class="cert-item">
+        <h4>Advertising Foundations</h4>
+        <div class="cert-issuer">LinkedIn</div>
+        <div class="cert-date">Issued Feb 2023</div>
+      </div>
+      <div class="cert-item">
+        <h4>Microsoft Excel 2019 Advanced</h4>
+        <div class="cert-issuer">Pearson</div>
+        <div class="cert-date">Issued Nov 2021</div>
+      </div>
+      <div class="cert-item">
+        <h4>Microsoft Excel 2019 Introductory</h4>
+        <div class="cert-issuer">Pearson</div>
+        <div class="cert-date">Issued Nov 2021</div>
+      </div>
+      <div class="cert-item">
+        <h4>Microsoft PowerPoint 2019 Introductory</h4>
+        <div class="cert-issuer">Pearson</div>
+        <div class="cert-date">Issued Dec 2021</div>
+      </div>
+      <div class="cert-item">
+        <h4>Microsoft Word 2019 Introductory</h4>
+        <div class="cert-issuer">Pearson</div>
+        <div class="cert-date">Issued Oct 2021</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-eyebrow">Education</div>
+    <h2>Academic Background</h2>
+
+    <div class="edu-item">
+      <h4>Ontario Graduate Certificate — Global Business Management</h4>
+      <div class="edu-school">Humber College &middot; Toronto, ON</div>
+      <div class="edu-meta">Sep 2021 – Apr 2023 &middot; GPA: 91.5</div>
+      <div class="edu-desc">A 4-semester program focused on preparing students for real-life business situations. The first half covered major functional areas across business leadership, while the final two semesters specialized in Marketing Management — covering Digital Business Management, Strategic Marketing Management, Customer Relationship Management, and Marketing Leadership and Innovation.</div>
+      <div class="edu-activities">President, Rotaract Club &middot; Sports Coordinator, Student Union</div>
+    </div>
+
+    <div class="edu-item">
+      <h4>Bachelor of Science — Business Management</h4>
+      <div class="edu-school">University of Wales &middot; Colombo</div>
+      <div class="edu-meta">2015 – 2019 &middot; 2nd Class Division 1</div>
+      <div class="edu-desc">Full-time program concluding with a dissertation and a Real-Life Problem Solving module where students researched and solved an actual problem for a sponsor company. Core curriculum spanned human resources, finance, marketing, and data analytics with industry-experienced faculty.</div>
+      <div class="edu-activities">President, Rotaract Club &middot; Sergeant at Arms, Rotaract Club &middot; Sports Coordinator, Student Union &middot; Football Team (2016–2019)</div>
+    </div>
+
+    <div class="edu-item">
+      <h4>G.C.E. Advanced Level Certificate — Commerce Stream</h4>
+      <div class="edu-school">D. S. Senanayake College &middot; Colombo</div>
+      <div class="edu-meta">2002 – 2015</div>
+      <div class="edu-desc">D.S. Senanayake College is the largest multi-ethnic, trilingual national school established in the post-independence era of Sri Lanka.</div>
+      <div class="edu-activities">Finance Director, Interact Club (2013–2014) &middot; College Senior Colours for Rugby (2011, 2013–2015) &middot; Gymnastics Team (2002–2004) &middot; 3rd Place, Intra-school Shot Put (2012)</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VOLUNTEER -->
+  <section id="volunteer">
+    <div class="section-eyebrow">Volunteering & Leadership</div>
+    <h2>Community Involvement</h2>
+
+    <div class="vol-grid">
+      <div class="vol-item">
+        <h4>President</h4>
+        <div class="vol-org">Rotaract Club of IIHE</div>
+        <div class="vol-date">Jul 2017 – Jun 2018</div>
+        <div class="vol-desc">Led the college Rotaract club for the 2017/2018 term, organizing community service initiatives and social events.</div>
+      </div>
+      <div class="vol-item">
+        <h4>Sergeant at Arms</h4>
+        <div class="vol-org">Rotaract Club of IIHE</div>
+        <div class="vol-date">Jul 2016 – Jun 2017</div>
+        <div class="vol-desc">Managed event logistics and ensured smooth operations during club meetings and community events.</div>
+      </div>
+      <div class="vol-item">
+        <h4>Student Volunteer — IRONMAN Event</h4>
+        <div class="vol-org">The IRONMAN Group</div>
+        <div class="vol-date">Feb 2018</div>
+        <div class="vol-desc">Volunteered on event day as part of the Rotaract District team — assisted with athlete luggage management, refreshments, and vendor setup coordination.</div>
+      </div>
+      <div class="vol-item">
+        <h4>Director of Finance</h4>
+        <div class="vol-org">Interact Club of D.S. Senanayake College</div>
+        <div class="vol-date">Jul 2013 – Jun 2014</div>
+        <div class="vol-desc">Managed club finances and budgeting for community service projects during the school year.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="footer">
+    <div class="footer-name">Aashiq Siddik</div>
+    <div class="footer-links">
+      <a href="mailto:aashiqs227@gmail.com">aashiqs227@gmail.com</a>
+      <a href="https://www.linkedin.com/in/aashiq-siddik" target="_blank">LinkedIn</a>
+      <a href="index.html">&larr; Back to Portfolio</a>
+    </div>
+    <p class="footer-note">Toronto, ON &middot; Digital Marketing &middot; Campaign Management &middot; Operations</p>
+  </div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
+const saved = localStorage.getItem('theme');
+if (saved) document.documentElement.setAttribute('data-theme', saved);
+</script>
+
+</body>
+</html>
