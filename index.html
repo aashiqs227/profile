@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aashiq Siddik — Marketing Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* ── Theme Variables ── */
   :root {
+    --transition: 0.35s ease;
+  }
+
+  [data-theme="dark"] {
     --bg: #08080A;
-    --bg-elevated: #111114;
     --bg-card: #16161A;
     --bg-card-hover: #1C1C22;
     --border: #26262E;
@@ -19,12 +23,29 @@
     --accent: #E8C46C;
     --accent-dim: rgba(232, 196, 108, 0.08);
     --accent-mid: rgba(232, 196, 108, 0.18);
-    --accent-bright: #F0D480;
-    --red: #E86C6C;
+    --nav-bg: rgba(8,8,10,0.85);
+    --toggle-bg: #26262E;
+    --toggle-dot: #E8C46C;
+  }
+
+  [data-theme="light"] {
+    --bg: #F8F7F4;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F0EFEC;
+    --border: #DDD9D0;
+    --border-light: #C8C4BC;
+    --text: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-muted: #7A7A7A;
+    --accent: #A67C00;
+    --accent-dim: rgba(166, 124, 0, 0.06);
+    --accent-mid: rgba(166, 124, 0, 0.15);
+    --nav-bg: rgba(248,247,244,0.9);
+    --toggle-bg: #DDD9D0;
+    --toggle-dot: #A67C00;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -34,6 +55,7 @@
     line-height: 1.7;
     overflow-x: hidden;
     font-weight: 300;
+    transition: background var(--transition), color var(--transition);
   }
 
   .grain {
@@ -43,58 +65,84 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  [data-theme="light"] .grain { opacity: 0.015; }
+
   .container { max-width: 960px; margin: 0 auto; padding: 0 36px; }
 
-  /* ── Navigation ── */
+  /* ── Nav ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(8,8,10,0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     padding: 14px 0;
+    transition: background var(--transition), border var(--transition);
   }
 
-  nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
 
   .nav-name {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
     color: var(--text);
-    letter-spacing: 0.5px;
+    transition: color var(--transition);
   }
 
-  .nav-links {
-    display: flex; gap: 28px;
-    list-style: none;
-  }
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
 
   .nav-links a {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
     transition: color 0.3s;
   }
 
   .nav-links a:hover { color: var(--accent); }
 
-  /* ── Hero ── */
-  .hero {
-    padding: 160px 0 100px;
+  /* ── Theme Toggle ── */
+  .theme-toggle {
+    width: 44px; height: 24px;
+    background: var(--toggle-bg);
+    border-radius: 12px;
     position: relative;
+    cursor: pointer;
+    border: none;
+    transition: background var(--transition);
+    flex-shrink: 0;
   }
+
+  .theme-toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--toggle-dot);
+    transition: transform var(--transition), background var(--transition);
+  }
+
+  [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
+
+  .toggle-icon {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    font-size: 11px; line-height: 1;
+  }
+
+  .toggle-moon { left: 6px; }
+  .toggle-sun { right: 5px; }
+
+  [data-theme="dark"] .toggle-sun { opacity: 0.3; }
+  [data-theme="light"] .toggle-moon { opacity: 0.3; }
+
+  /* ── Hero ── */
+  .hero { padding: 160px 0 100px; position: relative; }
 
   .hero::before {
     content: '';
-    position: absolute;
-    top: -60px; right: -180px;
+    position: absolute; top: -60px; right: -180px;
     width: 600px; height: 600px;
     background: radial-gradient(circle, rgba(232,196,108,0.04) 0%, transparent 65%);
     pointer-events: none;
@@ -102,167 +150,97 @@
 
   .hero-eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 24px;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
     opacity: 0; animation: fadeUp 0.6s ease forwards;
   }
 
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(40px, 5.5vw, 64px);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -1px;
+    font-weight: 400; line-height: 1.1; letter-spacing: -1px;
     margin-bottom: 28px;
     opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
 
   .hero-desc {
-    font-size: 17px;
-    color: var(--text-mid);
-    max-width: 620px;
-    font-weight: 300;
+    font-size: 17px; color: var(--text-mid); max-width: 620px; font-weight: 300;
     opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
+    transition: color var(--transition);
   }
 
   .hero-stats {
-    display: flex; gap: 48px;
-    margin-top: 48px;
-    padding-top: 36px;
-    border-top: 1px solid var(--border);
+    display: flex; gap: 48px; margin-top: 48px;
+    padding-top: 36px; border-top: 1px solid var(--border);
     opacity: 0; animation: fadeUp 0.6s ease 0.3s forwards;
+    transition: border var(--transition);
   }
 
   .stat-num {
     font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 4px;
+    font-size: 36px; color: var(--accent); line-height: 1; margin-bottom: 4px;
   }
 
   .stat-label {
-    font-size: 12px;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
+    font-size: 12px; color: var(--text-muted);
+    letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
   }
 
   /* ── About ── */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 32px;
-  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
 
-  .about-text {
-    font-size: 15.5px;
-    color: var(--text-mid);
-    line-height: 1.85;
-  }
+  .about-text { font-size: 15.5px; color: var(--text-mid); line-height: 1.85; transition: color var(--transition); }
+  .about-text strong { color: var(--text); font-weight: 500; transition: color var(--transition); }
 
-  .about-text strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  .trait-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .trait-cards { display: flex; flex-direction: column; gap: 12px; }
 
   .trait {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px 22px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 22px;
     transition: all 0.3s ease;
   }
 
-  .trait:hover {
-    border-color: var(--accent-mid);
-    background: var(--bg-card-hover);
-  }
-
-  .trait h4 {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: var(--accent);
-  }
-
-  .trait p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.55;
-  }
+  .trait:hover { border-color: var(--accent-mid); background: var(--bg-card-hover); }
+  .trait h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--accent); }
+  .trait p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
 
   /* ── Sections ── */
   section { padding: 80px 0; }
 
   .section-eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
   }
 
   section h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 400;
-    margin-bottom: 10px;
+    font-size: 32px; font-weight: 400; margin-bottom: 10px;
   }
 
-  section > .container > p {
-    color: var(--text-muted);
-    font-size: 15px;
-    max-width: 620px;
-    margin-bottom: 8px;
+  section > .container > p,
+  section > p {
+    color: var(--text-muted); font-size: 15px;
+    max-width: 620px; margin-bottom: 8px;
   }
 
-  .divider { height: 1px; background: var(--border); }
+  .divider { height: 1px; background: var(--border); transition: background var(--transition); }
 
-  /* ── Project Cards ── */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 32px;
-  }
+  /* ── Cards ── */
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
 
   .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 24px;
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 24px;
+    transition: all 0.35s ease; position: relative; overflow: hidden;
   }
 
-  .card:hover {
-    background: var(--bg-card-hover);
-    border-color: rgba(232,196,108,0.15);
-    transform: translateY(-2px);
-  }
+  .card:hover { background: var(--bg-card-hover); border-color: var(--accent-mid); transform: translateY(-2px); }
 
   .card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
+    content: ''; position: absolute; top: 0; left: 0;
     width: 100%; height: 2px;
     background: linear-gradient(90deg, var(--accent), transparent);
     opacity: 0; transition: opacity 0.35s;
@@ -272,159 +250,124 @@
 
   .card-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
   }
 
-  .card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
-
-  .card p {
-    font-size: 13.5px;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 16px;
-  }
-
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; margin-bottom: 8px; }
+  .card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
   .card.full { grid-column: 1 / -1; }
 
   .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
   .tags span {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    background: var(--accent-dim);
-    color: var(--accent);
-    border-radius: 100px;
-    letter-spacing: 0.3px;
+    font-size: 10px; padding: 4px 10px;
+    background: var(--accent-dim); color: var(--accent);
+    border-radius: 100px; letter-spacing: 0.3px;
+    transition: background var(--transition);
   }
 
   /* ── Skills Strip ── */
-  .skills-strip {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 28px;
-  }
+  .skills-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 
   .skills-strip span {
-    font-size: 13px;
-    font-weight: 400;
-    padding: 8px 18px;
-    border: 1px solid var(--border);
+    font-size: 13px; font-weight: 400; padding: 8px 18px;
+    border: 1px solid var(--border); border-radius: 100px;
+    color: var(--text-mid); transition: all 0.3s;
+  }
+
+  .skills-strip span:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Tools Grid ── */
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+
+  .tool-group {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; transition: all var(--transition);
+  }
+
+  .tool-group h4 { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+  .tool-group p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+
+  /* ── Timeline ── */
+  .timeline { margin-top: 32px; position: relative; padding-left: 28px; }
+
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border-light);
+    transition: background var(--transition);
+  }
+
+  .tl-item { position: relative; padding-bottom: 28px; }
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-item::before {
+    content: ''; position: absolute;
+    left: -25px; top: 7px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    transition: border-color var(--transition);
+  }
+
+  .tl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--accent); letter-spacing: 1px; margin-bottom: 4px;
+  }
+
+  .tl-role { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .tl-company { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+  .tl-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  /* ── Education ── */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+
+  .edu-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px; transition: all var(--transition);
+  }
+
+  .edu-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .edu-card .edu-school { font-size: 13px; color: var(--accent); margin-bottom: 4px; }
+  .edu-card .edu-detail { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── CTA Link ── */
+  .full-profile-cta {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 14px; font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    padding: 12px 28px;
     border-radius: 100px;
-    color: var(--text-mid);
     transition: all 0.3s;
   }
 
-  .skills-strip span:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* ── Workflow Steps ── */
-  .workflow-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 32px;
-  }
-
-  .wf-step {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    position: relative;
-  }
-
-  .wf-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 44px;
-    color: var(--accent);
-    opacity: 0.15;
-    position: absolute;
-    top: 10px; right: 16px;
-  }
-
-  .wf-step h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-  .wf-step p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-
-  /* ── Philosophy ── */
-  .philosophy {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 44px;
-    margin-top: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .philosophy::before {
-    content: '\201C';
-    font-family: 'Playfair Display', serif;
-    font-size: 140px;
-    color: var(--accent);
-    opacity: 0.06;
-    position: absolute;
-    top: -20px; left: 16px;
-    line-height: 1;
-  }
-
-  .philosophy p {
-    font-size: 16.5px;
-    color: var(--text);
-    line-height: 1.85;
-  }
-
-  .philosophy strong {
-    color: var(--accent);
-    font-weight: 600;
+  .full-profile-cta:hover {
+    background: var(--accent);
+    color: var(--bg);
   }
 
   /* ── Footer ── */
   .footer {
-    padding: 72px 0 48px;
-    text-align: center;
+    padding: 72px 0 48px; text-align: center;
     border-top: 1px solid var(--border);
+    transition: border var(--transition);
   }
 
-  .footer-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 10px; }
 
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 10px;
-  }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 10px; }
 
   .footer-links a {
-    font-size: 14px;
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 400;
-    transition: opacity 0.3s;
+    font-size: 14px; color: var(--accent); text-decoration: none;
+    font-weight: 400; transition: opacity 0.3s;
   }
 
   .footer-links a:hover { opacity: 0.7; }
-
-  .footer-note {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
+  .footer-note { font-size: 12px; color: var(--text-muted); }
 
   /* ── Animations ── */
   @keyframes fadeUp {
@@ -439,8 +382,8 @@
     .hero-stats { flex-wrap: wrap; gap: 28px; }
     .about-grid { grid-template-columns: 1fr; }
     .cards-grid { grid-template-columns: 1fr; }
-    .workflow-grid { grid-template-columns: 1fr; }
-    .philosophy { padding: 28px; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
   }
 </style>
@@ -448,19 +391,24 @@
 <body>
 <div class="grain"></div>
 
-<!-- NAV -->
 <nav>
   <div class="container">
     <div class="nav-name">Aashiq Siddik</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Work</a></li>
-      <li><a href="#ads">Campaigns</a></li>
-      <li><a href="#ecommerce">E-Commerce</a></li>
-      <li><a href="#email">Email</a></li>
-      <li><a href="#ai">AI Workflow</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Work</a></li>
+        <li><a href="#ads">Campaigns</a></li>
+        <li><a href="#ecommerce">E-Commerce</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="toggle-icon toggle-moon">🌙</span>
+        <span class="toggle-icon toggle-sun">☀️</span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -469,9 +417,8 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-eyebrow">Digital Marketing &middot; Operations &middot; Strategy</div>
-    <h1>I figure things out.<br>Then I <em>execute.</em></h1>
-    <p class="hero-desc">I'm a digital marketing professional with a broad and growing skill set — not because I followed a linear path, but because every time I was handed a new challenge, I found a way to solve it. That pattern has taken me across paid media, project management, e-commerce, email marketing, analytics, and now AI-augmented workflows.</p>
-
+    <h1>I figure things out.<br>Then I <em>deliver.</em></h1>
+    <p class="hero-desc">Digital marketing professional with 5+ years of experience across paid media, project management, e-commerce, email marketing, and analytics. I didn't follow a linear path — every time I was handed a new challenge, I found a way to solve it. That pattern has built a broad, hands-on skill set that I bring to every team I join.</p>
     <div class="hero-stats">
       <div>
         <div class="stat-num">5+</div>
@@ -494,12 +441,11 @@
   <section id="about">
     <div class="section-eyebrow">About</div>
     <h2>The Generalist Who Gets It Done</h2>
-
     <div class="about-grid">
       <div class="about-text">
         <p>People don't come to me because I'm the expert in one narrow thing. <strong>They come to me because they know I'll figure it out</strong> — and I always do. Whether it's spinning up a paid campaign on a platform I've never touched, building an e-commerce store from scratch, or wrangling a multi-stakeholder project into a structured launch plan, I approach every problem the same way: break it down, learn what's needed, and execute.</p>
         <br>
-        <p>I didn't learn most of what I know through formal means. When the need arose, I taught myself — through research, through building, through getting my hands dirty. That's why my experience is so broad. And now, with AI becoming a core part of how I work, that surface area is expanding faster than ever. I'm currently completing the <strong>Claude Code API course</strong> and continuously investing in understanding how AI tools can be applied across every marketing function.</p>
+        <p>I didn't learn most of what I know through formal means. When the need arose, I taught myself — through research, through building, through getting my hands dirty. That's why my experience is so broad. And now, with AI becoming a core part of how I work, that surface area is expanding faster than ever.</p>
       </div>
       <div class="trait-cards">
         <div class="trait">
@@ -511,8 +457,8 @@
           <p>Content creation, ad platforms, CRM systems, HTML email — none learned formally, all learned by necessity and executed at a professional level.</p>
         </div>
         <div class="trait">
-          <h4>AI-Forward</h4>
-          <p>Actively building AI into daily workflows. Currently completing the Claude Code API course. Treating AI as leverage, not a gimmick.</p>
+          <h4>Continuous Learner</h4>
+          <p>Actively investing in AI tools, new platforms, and certifications. Currently certified in Anthropic's AI Fluency Framework and Claude Code.</p>
         </div>
       </div>
     </div>
@@ -520,46 +466,34 @@
 
   <div class="divider"></div>
 
-  <!-- PROJECT MANAGEMENT & OPS -->
+  <!-- 01 PROJECT MANAGEMENT -->
   <section id="projects">
     <div class="section-eyebrow">01 &mdash; Project Management & Operations</div>
     <h2>Systems, Launches & Stakeholder Management</h2>
     <p>From regulatory-heavy brokerage launches to multi-stakeholder software deployments — managing complexity is where I thrive.</p>
-
     <div class="cards-grid">
       <div class="card full">
         <div class="card-label">Operational Launch</div>
         <h3>Brokerage Launch — 84-Task Playbook</h3>
         <p>Produced a comprehensive launch checklist for a new real estate brokerage spanning legal/regulatory compliance (RECO, TRESA, TRREB, FINTRAC), digital infrastructure, CRM configuration, and marketing. AI was used to research requirements, sequence dependencies, and generate the structured task matrix.</p>
         <div class="tags">
-          <span>Project Planning</span>
-          <span>Regulatory</span>
-          <span>CRM</span>
-          <span>AI Research</span>
-          <span>Excel</span>
+          <span>Project Planning</span><span>Regulatory</span><span>CRM</span><span>AI Research</span><span>Excel</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Change Management</div>
         <h3>Field Operations Scheduler</h3>
-        <p>Led change management for a custom Odoo-based scheduling application for a surveying firm. Processed iterative change requests into developer-ready documentation across a multi-stakeholder cycle, using AI to structure and accelerate the documentation workflow.</p>
+        <p>Led change management for a custom Odoo-based scheduling application for a surveying firm. Processed iterative change requests into developer-ready documentation across a multi-stakeholder cycle.</p>
         <div class="tags">
-          <span>Odoo</span>
-          <span>Change Mgmt</span>
-          <span>AI Documentation</span>
-          <span>Stakeholders</span>
+          <span>Odoo</span><span>Change Mgmt</span><span>AI Documentation</span><span>Stakeholders</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Process Design</div>
         <h3>Marketing Team Workflow (Trello)</h3>
-        <p>Implemented Trello-based project management across siloed marketing departments — paid ads, design, print, studio, video, virtual tours, and staging — creating cross-team visibility and accountability for the first time.</p>
+        <p>Implemented Trello-based project management across siloed marketing departments — paid ads, design, print, studio, video, virtual tours, and staging — creating cross-team visibility and accountability.</p>
         <div class="tags">
-          <span>Trello</span>
-          <span>Cross-Team</span>
-          <span>Workflow Design</span>
+          <span>Trello</span><span>Cross-Team</span><span>Workflow Design</span>
         </div>
       </div>
     </div>
@@ -567,122 +501,87 @@
 
   <div class="divider"></div>
 
-  <!-- PAID ADS & CAMPAIGNS -->
+  <!-- 02 PAID ADS -->
   <section id="ads">
     <div class="section-eyebrow">02 &mdash; Paid Ads & Campaigns</div>
     <h2>Performance Marketing Across Platforms</h2>
     <p>Campaign strategy, ad creative, landing pages, and multi-platform execution across Meta, Google, and LinkedIn.</p>
-
     <div class="cards-grid">
       <div class="card">
         <div class="card-label">Meta Ads</div>
         <h3>Real Estate Lead Generation</h3>
-        <p>Managed Meta ad campaigns for real estate projects — pre-construction, commercial, and residential listings. Designed ad creatives, wrote copy, set up audiences, and managed budgets across multiple ad accounts.</p>
+        <p>Managed Meta ad campaigns for real estate — pre-construction, commercial, and residential. Reduced CPL by 20% through audience segmentation and budget reallocation. Designed creatives, wrote copy, and managed budgets across multiple ad accounts.</p>
         <div class="tags">
-          <span>Meta Ads</span>
-          <span>Lead Gen</span>
-          <span>Creative</span>
-          <span>Real Estate</span>
+          <span>Meta Ads</span><span>Lead Gen</span><span>Creative</span><span>CPL Optimization</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Google Ads</div>
         <h3>Landing Pages for Search Campaigns</h3>
-        <p>Built dedicated landing pages for Google Ads campaigns — focused on commercial and residential real estate projects. Optimized for conversion with clear CTAs, structured messaging, and mobile responsiveness.</p>
+        <p>Built dedicated landing pages on Hostinger with custom Zapier integrations for Google Ads campaigns. Optimized for conversion with clear CTAs, structured messaging, and mobile responsiveness.</p>
         <div class="tags">
-          <span>Google Ads</span>
-          <span>Landing Pages</span>
-          <span>Conversion</span>
+          <span>Google Ads</span><span>Landing Pages</span><span>Zapier</span><span>Conversion</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">LinkedIn Ads</div>
         <h3>Commercial Real Estate Campaigns</h3>
         <p>Ran LinkedIn ad campaigns targeting commercial real estate investors and developers — land sales, zoning-approved developments, and investment opportunities.</p>
         <div class="tags">
-          <span>LinkedIn Ads</span>
-          <span>B2B</span>
-          <span>Commercial RE</span>
+          <span>LinkedIn Ads</span><span>B2B</span><span>Commercial RE</span>
         </div>
       </div>
-
       <div class="card">
-        <div class="card-label">Campaign Strategy</div>
-        <h3>Social Media Re-Entry Campaign</h3>
-        <p>Designed a 7-day social media re-entry strategy — phased content rollout, audience re-engagement tactics, and messaging frameworks, all structured and refined using AI-powered ideation loops.</p>
+        <div class="card-label">Multi-Region</div>
+        <h3>Multilingual Social Campaigns</h3>
+        <p>Executed paid campaigns across Facebook and Instagram customized in English, Spanish, and French for 3 different regions — generating 200+ leads and achieving 100% growth in social platform followers.</p>
         <div class="tags">
-          <span>Social Strategy</span>
-          <span>Content Planning</span>
-          <span>AI Ideation</span>
+          <span>Multilingual</span><span>Lead Gen</span><span>200+ Leads</span><span>100% Growth</span>
         </div>
       </div>
     </div>
-
     <div class="skills-strip">
-      <span>Meta Business Suite</span>
-      <span>Google Ads</span>
-      <span>LinkedIn Campaign Manager</span>
-      <span>Ad Creative Design</span>
-      <span>Audience Targeting</span>
-      <span>A/B Testing</span>
-      <span>Conversion Optimization</span>
+      <span>Meta Business Suite</span><span>Google Ads</span><span>LinkedIn Campaign Manager</span><span>Ad Creative</span><span>Audience Targeting</span><span>A/B Testing</span><span>Conversion Optimization</span>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- E-COMMERCE & WEBSITES -->
+  <!-- 03 E-COMMERCE -->
   <section id="ecommerce">
     <div class="section-eyebrow">03 &mdash; E-Commerce & Web Projects</div>
     <h2>Building, Managing & Scaling Online</h2>
-    <p>Full e-commerce buildouts, website development projects, and B2B portal management.</p>
-
     <div class="cards-grid">
       <div class="card">
         <div class="card-label">E-Commerce</div>
         <h3>Shopify Store Buildout & SEO</h3>
-        <p>Managed a full Shopify e-commerce buildout — produced a phased SEO checklist, bulk product import workflows, and a structured growth plan, all AI-assisted from strategy through execution.</p>
+        <p>Managed a full Shopify e-commerce buildout — produced a phased SEO checklist, bulk product import workflows, and a structured growth plan.</p>
         <div class="tags">
-          <span>Shopify</span>
-          <span>SEO</span>
-          <span>CSV Workflows</span>
-          <span>AI Strategy</span>
+          <span>Shopify</span><span>SEO</span><span>CSV Workflows</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Website Management</div>
         <h3>E-Commerce &amp; B2B Wholesale Portal</h3>
-        <p>Designed all banners, pop-up ads, website flow, and content for a wholesale eyewear e-commerce platform. Managed the full website development project and produced supporting video content including virtual walkthroughs and tutorials.</p>
+        <p>Designed all banners, pop-up ads, website flow, and content for a wholesale eyewear e-commerce platform. Managed full website development and produced video content including virtual walkthroughs and tutorials.</p>
         <div class="tags">
-          <span>E-Commerce</span>
-          <span>Web Design</span>
-          <span>Content</span>
-          <span>Video</span>
+          <span>E-Commerce</span><span>Web Design</span><span>Content</span><span>Video</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Brokerage Tools</div>
         <h3>Internal Resource Hub</h3>
-        <p>Built a password-protected internal resource portal for a real estate brokerage — centralizing agent tools, login portals, and quick links into a single accessible interface.</p>
+        <p>Built a password-protected internal resource portal for a real estate brokerage — centralizing agent tools, login portals, and quick links.</p>
         <div class="tags">
-          <span>Web Development</span>
-          <span>Internal Tools</span>
-          <span>UX</span>
+          <span>Web Development</span><span>Internal Tools</span><span>UX</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Prospecting</div>
         <h3>LinkedIn Outreach Automation</h3>
-        <p>Built a simplified LinkedIn prospecting workflow using Claude's browser tools to generate targeted outreach — identifying companies posting relevant job listings and producing personalized messages at scale.</p>
+        <p>Built a LinkedIn prospecting workflow using AI browser tools to generate targeted outreach — identifying companies posting relevant listings and producing personalized messages at scale.</p>
         <div class="tags">
-          <span>Claude in Chrome</span>
-          <span>LinkedIn</span>
-          <span>Lead Gen</span>
+          <span>AI Automation</span><span>LinkedIn</span><span>Lead Gen</span>
         </div>
       </div>
     </div>
@@ -690,33 +589,25 @@
 
   <div class="divider"></div>
 
-  <!-- EMAIL MARKETING -->
+  <!-- 04 EMAIL -->
   <section id="email">
     <div class="section-eyebrow">04 &mdash; Email Marketing</div>
     <h2>Campaigns, Templates & CRM-Driven Outreach</h2>
-    <p>From project-specific Mailchimp campaigns to CRM-designed product emails — building emails that perform.</p>
-
     <div class="cards-grid">
       <div class="card">
         <div class="card-label">Project Campaigns</div>
         <h3>Real Estate Listing Emails</h3>
-        <p>Built and deployed property-specific email campaigns via Mailchimp for commercial real estate listings — office space, retail opportunities, and price drop announcements. Ontario RECO/TRESA compliant.</p>
+        <p>Built and deployed property-specific email campaigns via Mailchimp for commercial real estate listings — office space, retail, and price drop announcements. Ontario RECO/TRESA compliant.</p>
         <div class="tags">
-          <span>Mailchimp</span>
-          <span>HTML Email</span>
-          <span>Compliance</span>
-          <span>Real Estate</span>
+          <span>Mailchimp</span><span>HTML Email</span><span>Compliance</span>
         </div>
       </div>
-
       <div class="card">
         <div class="card-label">Product Email</div>
         <h3>E-Commerce Product Campaigns</h3>
-        <p>Designed product-focused email campaigns through CRM for an eyewear e-commerce brand — featuring new arrivals, brand spotlights, and curated product grids.</p>
+        <p>Designed product-focused email campaigns through CRM for an eyewear e-commerce brand — new arrivals, brand spotlights, and curated product grids.</p>
         <div class="tags">
-          <span>CRM Email</span>
-          <span>E-Commerce</span>
-          <span>Product Marketing</span>
+          <span>CRM Email</span><span>E-Commerce</span><span>Product Marketing</span>
         </div>
       </div>
     </div>
@@ -724,22 +615,17 @@
 
   <div class="divider"></div>
 
-  <!-- ANALYTICS -->
-  <section id="analytics">
+  <!-- 05 ANALYTICS -->
+  <section>
     <div class="section-eyebrow">05 &mdash; Analytics & Reporting</div>
     <h2>Dashboards & Data-Driven Decisions</h2>
-
     <div class="cards-grid">
       <div class="card full">
         <div class="card-label">Marketing Analytics</div>
         <h3>Multi-Account Ads Dashboard</h3>
         <p>Built a Looker Studio dashboard blending Meta and Google Ads data across multiple ad accounts into a unified campaign performance view. Used AI to structure data models, define KPI logic, and design the reporting layer.</p>
         <div class="tags">
-          <span>Looker Studio</span>
-          <span>Meta Ads</span>
-          <span>Google Ads</span>
-          <span>AI-Assisted</span>
-          <span>KPI Design</span>
+          <span>Looker Studio</span><span>Meta Ads</span><span>Google Ads</span><span>KPI Design</span>
         </div>
       </div>
     </div>
@@ -747,42 +633,121 @@
 
   <div class="divider"></div>
 
-  <!-- CONTENT -->
+  <!-- 06 CONTENT -->
   <section>
     <div class="section-eyebrow">06 &mdash; Content & Creative</div>
     <h2>Blogs, Video & Collateral</h2>
-
     <div class="cards-grid">
       <div class="card">
         <div class="card-label">Written Content</div>
         <h3>Blog Writing & SEO Content</h3>
-        <p>Produced blog content spanning real estate guides, business IT checklists, and industry thought pieces — written for both SEO performance and reader engagement.</p>
-        <div class="tags">
-          <span>Blog Writing</span>
-          <span>SEO</span>
-          <span>Content Strategy</span>
-        </div>
+        <p>Blog content spanning real estate guides, business checklists, and industry thought pieces — written for SEO performance and reader engagement.</p>
+        <div class="tags"><span>Blog Writing</span><span>SEO</span><span>Content Strategy</span></div>
       </div>
-
       <div class="card">
         <div class="card-label">Video & Events</div>
         <h3>Video Library & Event Catalogs</h3>
-        <p>Produced video content including virtual warehouse walkthroughs, B2B portal tutorials, and brand introduction videos. Designed event catalogs and marketing collateral for real estate expos.</p>
-        <div class="tags">
-          <span>Video Production</span>
-          <span>Event Marketing</span>
-          <span>Collateral</span>
-        </div>
+        <p>Produced video content including virtual walkthroughs, B2B tutorials, and brand videos. Designed event catalogs and collateral for real estate expos including the Dubai Real Estate Expo.</p>
+        <div class="tags"><span>Video Production</span><span>Event Marketing</span><span>Collateral</span></div>
       </div>
-
       <div class="card">
         <div class="card-label">Guides</div>
         <h3>Home Seller's Guide</h3>
         <p>Produced comprehensive home seller guides for real estate agents — designed, written, and formatted as branded PDF collateral for client-facing distribution.</p>
-        <div class="tags">
-          <span>Guide Design</span>
-          <span>Branding</span>
-          <span>PDF</span>
+        <div class="tags"><span>Guide Design</span><span>Branding</span><span>PDF</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="section-eyebrow">Tools & Technologies</div>
+    <h2>What I Work With</h2>
+    <div class="tools-grid">
+      <div class="tool-group">
+        <h4>Advertising</h4>
+        <p>Meta Ads, Google Ads, LinkedIn Campaign Manager, TikTok, audience targeting, A/B testing, conversion optimization</p>
+      </div>
+      <div class="tool-group">
+        <h4>Analytics & Reporting</h4>
+        <p>Looker Studio, Google Analytics, Microsoft Clarity, Meta Insights, performance dashboards, KPI design</p>
+      </div>
+      <div class="tool-group">
+        <h4>CRM & Automation</h4>
+        <p>Industry CRM platforms, Mailchimp, Constant Contact, Zapier, Jotform, lead routing, email automation</p>
+      </div>
+      <div class="tool-group">
+        <h4>E-Commerce & Web</h4>
+        <p>Shopify, WordPress, Wix, Hostinger, SEO, HTML email, DNS management, GoDaddy</p>
+      </div>
+      <div class="tool-group">
+        <h4>Project & Design</h4>
+        <p>Trello, Asana, Adobe Suite, cross-functional coordination, stakeholder management, change management</p>
+      </div>
+      <div class="tool-group">
+        <h4>AI & Emerging</h4>
+        <p>Claude (Anthropic), Claude Code, AI-assisted content workflows, prompt engineering, AI campaign optimization</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-eyebrow">Career</div>
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">SEP 2024 &mdash; PRESENT</div>
+        <div class="tl-role">Digital Marketing Specialist</div>
+        <div class="tl-company">Save Max Real Estate &middot; Mississauga, ON</div>
+        <div class="tl-desc">Managing end-to-end multi-channel campaigns across Meta, Google, and LinkedIn. Reduced CPL by 20% through audience segmentation. Primary contact for content, CRM management, agent onboarding, and monthly performance reviews. Coordinated the Dubai Real Estate Expo marketing efforts.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">JAN 2023 &mdash; SEP 2024</div>
+        <div class="tl-role">Digital Marketing Specialist</div>
+        <div class="tl-company">Everything Optical (Team ETO) &middot; Markham, ON</div>
+        <div class="tl-desc">Led digital marketing across e-commerce. Built a new B2C Shopify website, managed CRM/ERP marketing technologies, executed multilingual paid campaigns generating 200+ leads with 100% social follower growth.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">FEB 2020 &mdash; NOV 2021</div>
+        <div class="tl-role">Digital Marketing Executive</div>
+        <div class="tl-company">Global Choice Marketing &middot; Colombo</div>
+        <div class="tl-desc">Developed sales-driving strategies across digital platforms. Led WordPress marketing and development, managed project timelines, and signed 4 new clients through email marketing initiatives.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">MAY 2019 &mdash; JAN 2020</div>
+        <div class="tl-role">Digital Content Specialist</div>
+        <div class="tl-company">Media Monkey &middot; Colombo</div>
+        <div class="tl-desc">Key client contact for social media content. Monthly performance reviews, blog content generating 500+ unique views per post, and hosting services for a food review sub-brand.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">SEP 2018 &mdash; APR 2019</div>
+        <div class="tl-role">Social Media Trainee</div>
+        <div class="tl-company">Seven Media Group &middot; Colombo</div>
+        <div class="tl-desc">Led client accounts, guided graphics teams on brand standards, managed campaign execution, and contributed to business development through proactive campaign proposals.</div>
+      </div>
+    </div>
+
+    <a href="full-profile.html" class="full-profile-cta">View Full Profile &rarr;</a>
+
+    <!-- EDUCATION -->
+    <div style="margin-top: 56px;">
+      <div class="section-eyebrow">Education</div>
+      <h2>Academic Background</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h4>Global Business Management</h4>
+          <div class="edu-school">Humber College &middot; Toronto, ON</div>
+          <div class="edu-detail">Ontario Graduate Certificate &middot; 2023 &middot; GPA: 91.5<br>President, Rotaract Club &middot; Sports Coordinator, Student Union</div>
+        </div>
+        <div class="edu-card">
+          <h4>BSc Business Management</h4>
+          <div class="edu-school">University of Wales &middot; Colombo</div>
+          <div class="edu-detail">2nd Class Division 1 &middot; 2019<br>President, Rotaract Club &middot; Sports Coordinator, Student Union &middot; Football Team</div>
         </div>
       </div>
     </div>
@@ -790,48 +755,31 @@
 
   <div class="divider"></div>
 
-  <!-- AI WORKFLOW -->
-  <section id="ai">
-    <div class="section-eyebrow">How I Work</div>
-    <h2>AI as a Force Multiplier</h2>
-    <p>AI is a cognitive tool, not a magic button. My workflow treats it as a system — structured inputs produce structured outputs.</p>
-
-    <div class="workflow-grid">
-      <div class="wf-step">
-        <div class="wf-num">1</div>
-        <h4>Context First</h4>
-        <p>Prompts are drafted in a Notes app — full situation, task definition, and constraints loaded before the AI sees anything. No lazy inputs.</p>
-      </div>
-      <div class="wf-step">
-        <div class="wf-num">2</div>
-        <h4>Smartest Models</h4>
-        <p>Always use the most capable model available. The gap between free-tier and frontier isn't incremental — it's generational. The gap compounds.</p>
-      </div>
-      <div class="wf-step">
-        <div class="wf-num">3</div>
-        <h4>Expertise Layer</h4>
-        <p>AI supplements, it doesn't replace. Domain knowledge shapes the prompt, evaluates the output, and makes the final call. That's where above-average happens.</p>
-      </div>
-    </div>
-
-    <div class="philosophy" style="margin-top: 24px;">
-      <p>Anyone not using AI — or not using the most capable models of the time — will fall behind. That dynamic is now best understood as <strong>leverage</strong>. Those who adapt and implement AI into their workflows gain compounding advantages. In marketing, this leverage shows up across every layer: content creation, campaign planning, automating repetitive operations, and increasingly, the complete management and optimization of paid campaigns. The question isn't whether to use AI — it's how fast you can build the systems around it.</p>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- FOOTER / CONTACT -->
+  <!-- FOOTER -->
   <div class="footer" id="contact">
     <div class="footer-name">Aashiq Siddik</div>
     <div class="footer-links">
       <a href="mailto:aashiqs227@gmail.com">aashiqs227@gmail.com</a>
       <a href="https://www.linkedin.com/in/aashiq-siddik" target="_blank">LinkedIn</a>
     </div>
-    <p class="footer-note">Toronto, ON &middot; Digital Marketing &middot; Operations &middot; AI-Augmented Workflows</p>
+    <p class="footer-note">Toronto, ON &middot; Digital Marketing &middot; Campaign Management &middot; Operations</p>
   </div>
 
 </div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
+// Load saved preference
+const saved = localStorage.getItem('theme');
+if (saved) document.documentElement.setAttribute('data-theme', saved);
+</script>
 
 </body>
 </html>
