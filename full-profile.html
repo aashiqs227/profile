@@ -198,6 +198,62 @@
   .vol-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
   .vol-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
 
+  /* ── Portfolio Showcase ── */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .showcase-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.35s;
+  }
+
+  .showcase-item:hover {
+    border-color: var(--accent-mid);
+    background: var(--bg-card-hover);
+  }
+
+  .showcase-item.full { grid-column: 1 / -1; }
+
+  .showcase-item h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .showcase-cat { font-size: 11px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+  .showcase-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+
+  .showcase-link {
+    font-size: 12px; color: var(--accent); text-decoration: none;
+    font-weight: 500; transition: opacity 0.3s;
+  }
+
+  .showcase-link:hover { opacity: 0.7; }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 16 / 9;
+    background: #000;
+    margin-bottom: 14px;
+  }
+
+  .video-wrapper iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: 0;
+  }
+
+  .video-caption {
+    font-size: 13px; color: var(--text-muted); font-style: italic; text-align: center;
+  }
+
+  .video-caption strong { color: var(--accent); font-weight: 500; font-style: normal; }
+
   /* ── Footer ── */
   .footer {
     padding: 60px 0 40px; text-align: center;
@@ -220,6 +276,7 @@
     .page-header { padding: 100px 0 40px; }
     .cert-grid { grid-template-columns: 1fr; }
     .vol-grid { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
   }
 </style>
@@ -233,6 +290,7 @@
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#certs">Certifications</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#volunteer">Volunteering</a></li>
@@ -357,6 +415,87 @@
           <li>Negotiated with clients and agents to accommodate both parties' availability for property showings</li>
           <li>Ensured customer satisfaction throughout the entire customer journey</li>
         </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PORTFOLIO SHOWCASE -->
+  <section id="portfolio">
+    <div class="section-eyebrow">Work Samples & Creative Portfolio</div>
+    <h2>See It In Action</h2>
+
+    <!-- Video -->
+    <div class="showcase-item full" style="margin-top: 24px; margin-bottom: 24px;">
+      <div class="showcase-cat">On-Camera &middot; Content Hosting</div>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/aG8I2l-wIsM?modestbranding=1&rel=0" allow="encrypted-media" allowfullscreen></iframe>
+      </div>
+      <p class="video-caption"><strong>Cake Katha — Episode 1</strong> — I hosted a food review series for an agency client's sub-brand at Media Monkey. Yes, that's me on camera.</p>
+    </div>
+
+    <div class="showcase-grid">
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Paid Ads &middot; Meta</div>
+        <h4>Meta Ads Campaigns</h4>
+        <p>Real estate lead generation creatives for pre-construction, commercial office, and residential projects. Also managed retail e-commerce campaigns for a wholesale eyewear brand.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Paid Ads &middot; LinkedIn</div>
+        <h4>LinkedIn Ads — Land Sales</h4>
+        <p>Commercial real estate campaigns targeting investors and developers — zoning-approved developments and investment-grade land in Beamsville, ON.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Landing Pages &middot; Google Ads</div>
+        <h4>Landing Page Design</h4>
+        <p>Built conversion-optimized landing pages on Hostinger for Google Ads campaigns — residential and commercial development projects with integrated Zapier lead routing.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">E-Commerce &middot; Shopify</div>
+        <h4>B2C E-Commerce Website</h4>
+        <p>100% contribution — designed all banners, pop-up ads, website flow, content, and managed the full website development project for a wholesale eyewear e-commerce platform.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Email Marketing &middot; Mailchimp</div>
+        <h4>Real Estate Email Campaigns</h4>
+        <p>Property-specific campaigns via Mailchimp — "Price Drop | Prime Office for Lease," "Office Space in Class A Building," "Prime Commercial Retail Opportunity." Ontario RECO/TRESA compliant.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Email Marketing &middot; CRM</div>
+        <h4>Product Email Campaigns</h4>
+        <p>CRM-designed product emails for an eyewear e-commerce brand — featuring curated product grids, new arrivals, and brand spotlight layouts.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Web &middot; Internal Tools</div>
+        <h4>Brokerage Resource Portal</h4>
+        <p>Password-protected internal resource hub for a real estate brokerage — centralizing agent tools, login portals (BrokerBay, MaxCenter), and quick links.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Video Production</div>
+        <h4>Video Library</h4>
+        <p>Produced video content including virtual warehouse walkthroughs, B2B portal tutorials ("How to use B2B portal — Step by step"), and multilingual brand introduction videos.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Event Marketing</div>
+        <h4>First-Time Home Buyers Expo 2025</h4>
+        <p>Coordinated marketing for a major real estate expo — event catalog design, social media promotion, email campaigns, and on-site logistics.</p>
+      </div>
+
+      <div class="showcase-item">
+        <div class="showcase-cat">Content &middot; Guides</div>
+        <h4>Home Seller's Guide</h4>
+        <p>Designed and written comprehensive home seller's guide — branded PDF collateral for real estate agents to distribute to clients.</p>
       </div>
 
     </div>
