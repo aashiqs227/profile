@@ -1,0 +1,262 @@
+/* ============================================================================
+   Mastercard-Inspired Design System
+   colors_and_type.css
+   --------------------------------------------------------------------------
+   Foundational design tokens: color palette, type scale, spacing, radii,
+   elevation. Semantic aliases live alongside base tokens (h1, h2, body, etc).
+
+   Substitute font: Sofia Sans (Google Fonts). MarkForMC is Mastercard's
+   proprietary geometric sans and not licensed for general use; Sofia Sans
+   is the closest open-source match and is already in Mastercard's
+   declared fallback stack.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;450;500;700&display=swap");
+
+:root {
+  /* ------------------------------------------------------------------------
+     COLORS — Brand & Identity
+     ---------------------------------------------------------------------- */
+  --color-brand-red:           #EB001B; /* Logo only — never UI */
+  --color-brand-yellow:        #F79E1B; /* Logo only — never UI */
+
+  /* ------------------------------------------------------------------------
+     COLORS — Surfaces (the warm cream system)
+     ---------------------------------------------------------------------- */
+  --color-canvas:              #F3F0EE; /* Default page background */
+  --color-canvas-lifted:       #FCFBFA; /* Nested raised sections */
+  --color-white:               #FFFFFF; /* Nav pill, satellite CTAs, modals */
+  --color-bone:                #F4F4F4; /* Cool-gray alternate surface */
+  --color-ghost:               #E8E2DA; /* Cream-on-cream watermark text */
+
+  /* ------------------------------------------------------------------------
+     COLORS — Ink (foreground + text)
+     ---------------------------------------------------------------------- */
+  --color-ink:                 #141413; /* Primary headline, body, footer bg */
+  --color-charcoal:            #262627; /* Softer alt for some text */
+  --color-granite:             #555555; /* Inline body accents */
+  --color-graphite:            #565656; /* Link alternates */
+  --color-slate:               #696969; /* Muted secondary text */
+  --color-dust:                #D1CDC7; /* Whisper/disabled text on cream */
+
+  /* ------------------------------------------------------------------------
+     COLORS — Signal & Accent
+     ---------------------------------------------------------------------- */
+  --color-signal-orange:       #CF4500; /* Consent / legal CTAs only */
+  --color-light-signal-orange: #F37338; /* Orbital arcs, carousel indicators */
+  --color-clay:                #9A3A0A; /* Secondary link-style buttons */
+  --color-link-blue:           #3860BE; /* Inline links, info callouts */
+
+  /* ------------------------------------------------------------------------
+     SEMANTIC COLOR ALIASES
+     ---------------------------------------------------------------------- */
+  --bg:               var(--color-canvas);
+  --bg-lifted:        var(--color-canvas-lifted);
+  --bg-inverse:       var(--color-ink);
+  --surface:          var(--color-white);
+
+  --fg1:              var(--color-ink);         /* Primary text */
+  --fg2:              var(--color-granite);     /* Secondary text */
+  --fg3:              var(--color-slate);       /* Muted text */
+  --fg-disabled:      var(--color-dust);        /* Whisper/disabled */
+  --fg-inverse:       var(--color-canvas);      /* On dark surfaces (cream, NOT white) */
+  --fg-link:          var(--color-link-blue);
+  --fg-watermark:     var(--color-ghost);
+
+  --accent-signal:    var(--color-signal-orange);
+  --accent-orbit:     var(--color-light-signal-orange);
+  --accent-clay:      var(--color-clay);
+
+  --border-ink:       var(--color-ink);
+  --border-soft:      rgba(20, 20, 19, 0.12);
+  --border-hairline:  rgba(20, 20, 19, 0.06);
+  --border-on-dark:   rgba(255, 255, 255, 0.40);
+
+  /* ------------------------------------------------------------------------
+     TYPOGRAPHY — Family
+     ---------------------------------------------------------------------- */
+  --font-sans: "Sofia Sans", "MarkForMC", "MarkOffcForMC", Arial, sans-serif;
+  --font-display: var(--font-sans); /* One-font system — no display accent */
+
+  /* ------------------------------------------------------------------------
+     TYPOGRAPHY — Weights
+     The 450 weight is load-bearing — softer than 500, firmer than 400.
+     ---------------------------------------------------------------------- */
+  --fw-body:       450;
+  --fw-medium:     500;
+  --fw-bold:       700;
+
+  /* ------------------------------------------------------------------------
+     TYPOGRAPHY — Sizes & line-heights (the editorial scale)
+     ---------------------------------------------------------------------- */
+  --fs-hero:       64px;
+  --fs-h1:         48px;
+  --fs-h2:         36px;
+  --fs-h3:         24px;
+  --fs-h4:         18px;
+  --fs-body:       16px;
+  --fs-small:      14px;
+  --fs-micro:      12px;
+  --fs-watermark:  128px;
+
+  --lh-hero:       1.00;   /* 1:1 — tight display */
+  --lh-h1:         1.05;
+  --lh-h2:         1.22;
+  --lh-h3:         1.20;
+  --lh-body:       1.40;   /* comfortable reading */
+  --lh-tight:      1.30;
+
+  /* Headline tracking: -2% */
+  --ls-display:    -0.02em;
+  --ls-button:     -0.03em;
+  --ls-eyebrow:    0.04em;  /* +4% only on uppercase eyebrow */
+
+  /* ------------------------------------------------------------------------
+     SPACING — 8px scale
+     ---------------------------------------------------------------------- */
+  --space-1:   8px;
+  --space-2:   16px;
+  --space-3:   24px;
+  --space-4:   32px;
+  --space-5:   48px;
+  --space-6:   64px;
+  --space-7:   96px;
+  --space-8:   128px;
+
+  --gutter-page:    48px;
+  --gutter-page-lg: 100px;
+  --section-pad:    96px;
+
+  /* ------------------------------------------------------------------------
+     RADII — committed to small / medium-large / full-pill
+     ---------------------------------------------------------------------- */
+  --r-xs:     4px;
+  --r-button: 20px;
+  --r-consent: 24px;
+  --r-hero:   40px;
+  --r-pill:   999px;
+  --r-circle: 50%;
+
+  /* ------------------------------------------------------------------------
+     ELEVATION — atmospheric, never directional
+     ---------------------------------------------------------------------- */
+  --shadow-0: none;
+  --shadow-1: 0 4px 24px 0 rgba(0, 0, 0, 0.04);   /* Floating nav */
+  --shadow-2: 0 24px 48px 0 rgba(0, 0, 0, 0.08);  /* Hero, cards */
+  --shadow-3: 0 70px 110px 0 rgba(0, 0, 0, 0.25); /* Dramatic — rare */
+
+  /* ------------------------------------------------------------------------
+     MOTION — gentle, editorial
+     ---------------------------------------------------------------------- */
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:  150ms;
+  --dur-mid:   240ms;
+  --dur-slow:  480ms;
+
+  /* ------------------------------------------------------------------------
+     LAYOUT
+     ---------------------------------------------------------------------- */
+  --max-content: 1280px;
+}
+
+/* ============================================================================
+   SEMANTIC ELEMENT BASELINES
+   These are intentionally low-specificity so consumers can override.
+   ========================================================================== */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg1);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-display);
+  color: var(--fg1);
+  margin: 0;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-display);
+  color: var(--fg1);
+  margin: 0;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-display);
+  color: var(--fg1);
+  margin: 0;
+}
+
+h4, .h4 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  margin: 0;
+}
+
+p, .body {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-body);
+  color: var(--fg1);
+  margin: 0;
+}
+
+small, .small {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-body);
+  line-height: 1.45;
+  color: var(--fg2);
+}
+
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg1);
+}
+.eyebrow::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orbit);
+}
+
+.watermark {
+  font-family: var(--font-display);
+  font-size: var(--fs-watermark);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-display);
+  line-height: 0.95;
+  color: var(--fg-watermark);
+}
