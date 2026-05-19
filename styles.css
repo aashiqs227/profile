@@ -165,7 +165,8 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   bottom: 48px;
   left: 50%;
-  transform: translateX(-50%);
+  /* keep the -50% in the keyframe too, or the animation end-state drops it */
+  transform: translate(-50%, 18px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -180,7 +181,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   opacity: 0;
-  animation: rise 700ms var(--ease-out) 2.0s forwards;
+  animation: riseEnter 700ms var(--ease-out) 2.0s forwards;
 }
 .splash-enter-circle {
   width: 56px;
@@ -207,6 +208,9 @@ a { color: inherit; text-decoration: none; }
 
 @keyframes rise {
   to { transform: translateY(0); opacity: 1; }
+}
+@keyframes riseEnter {
+  to { transform: translate(-50%, 0); opacity: 1; }
 }
 @keyframes pulse {
   0% { transform: scale(1); opacity: 0; }
@@ -1121,6 +1125,10 @@ main.app.ready { opacity: 1; }
     --gutter-page: 32px;
   }
 
+  /* Decorative section watermarks are sized to bleed off-screen by design;
+     on smaller screens that just reads as clipped text, so hide them */
+  .watermark { display: none; }
+
   /* Section head — stack heading + lede */
   .section-head { margin-bottom: 48px; gap: 16px; }
   .section-head .row { flex-direction: column; align-items: flex-start; gap: 20px; }
@@ -1174,7 +1182,6 @@ main.app.ready { opacity: 1; }
 
   /* Hero */
   .hero { padding: 130px 0 56px; }
-  .hero .watermark { top: 90px; font-size: clamp(96px, 28vw, 180px); }
   .hero-grid { gap: 40px; }
   .hero h1 { font-size: clamp(38px, 11vw, 64px); }
   .hero-stats {
@@ -1193,7 +1200,6 @@ main.app.ready { opacity: 1; }
   .section-head .lede { font-size: 16px; }
 
   /* Versatility */
-  .versatility .watermark { font-size: clamp(72px, 22vw, 140px); top: 30px; right: -30px; }
   .video-frame { border-radius: 24px; margin-top: 32px; }
   .video-caption { font-size: 14px; }
   .versatility-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 48px; }
@@ -1256,17 +1262,14 @@ main.app.ready { opacity: 1; }
   footer.site .col a { font-size: 15px; }
   footer.site .bottom { margin-top: 28px; font-size: 12px; }
 
-  /* Watermarks — pull in so they don't crash sections */
-  .watermark { font-size: clamp(72px, 22vw, 160px) !important; }
-
   /* Global orbit — shrink so it doesn't dominate */
   .global-orbit { width: 360px; height: 360px; right: -160px; opacity: 0.22; }
 
   /* Splash refinements */
-  .splash-eyebrow { margin-bottom: 32px; font-size: 11px; }
-  .splash-tagline { font-size: clamp(48px, 14vw, 88px); }
-  .splash-meta { margin-top: 36px; gap: 10px 14px; }
-  .splash-enter { bottom: 32px; gap: 10px; font-size: 11px; }
+  .splash-eyebrow { margin-bottom: 26px; font-size: 11px; }
+  .splash-tagline { font-size: clamp(44px, 12vw, 80px); line-height: 0.98; }
+  .splash-meta { margin-top: 30px; gap: 8px 14px; }
+  .splash-enter { bottom: 26px; gap: 10px; font-size: 11px; }
   .splash-enter-circle { width: 48px; height: 48px; }
 }
 
@@ -1278,7 +1281,7 @@ main.app.ready { opacity: 1; }
   .container, .container-narrow { padding: 0 20px; }
 
   /* Splash — tighten further */
-  .splash-tagline { font-size: clamp(42px, 14vw, 64px); line-height: 0.98; }
+  .splash-tagline { font-size: clamp(33px, 11vw, 56px); line-height: 1; }
   .splash-meta {
     flex-direction: column;
     gap: 4px;
