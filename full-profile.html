@@ -190,10 +190,28 @@
     color: var(--color-granite);
   }
 
+  @media (max-width: 900px) {
+    .page-header { padding: 140px 0 56px; }
+    .page-header h1 { font-size: clamp(40px, 11vw, 72px); }
+    .page-header .lede { font-size: 16.5px; }
+    .edu-detail-card { padding: 32px 28px; border-radius: 28px; }
+    .edu-detail-card h4 { font-size: 22px; }
+    .vol-item { padding: 24px; }
+    .vol-item h4 { font-size: 19px; }
+    .showcase-item { padding: 28px; border-radius: 24px; }
+    .cert-item { padding: 20px 22px; border-radius: 18px; }
+    .cert-item h4 { font-size: 15px; }
+  }
   @media (max-width: 720px) {
     .cert-grid, .vol-grid, .showcase-grid { grid-template-columns: 1fr; }
-    .edu-detail-card { padding: 32px; }
-    .page-header { padding: 140px 0 64px; }
+    .page-header { padding: 120px 0 48px; }
+    .page-header .back { margin-bottom: 24px; }
+    .tl-bullets li { font-size: 14px; padding-left: 18px; }
+  }
+  @media (max-width: 480px) {
+    .edu-detail-card { padding: 26px 22px; }
+    .edu-detail-card h4 { font-size: 19px; }
+    .edu-detail-card .edu-activities { display: block; font-size: 12.5px; }
   }
 </style>
 </head>
@@ -527,7 +545,6 @@
         <div class="edu-school">Humber College · Toronto, ON</div>
         <div class="edu-meta">Sep 2021 — Apr 2023 · GPA 91.5</div>
         <p class="edu-desc">A 4-semester program focused on preparing students for real-life business situations. The first half covered major functional areas across business leadership, while the final two semesters specialized in Marketing Management — covering Digital Business Management, Strategic Marketing Management, Customer Relationship Management, and Marketing Leadership and Innovation.</p>
-        <div class="edu-activities">President, Rotaract Club · Sports Coordinator, Student Union</div>
       </div>
 
       <div class="edu-detail-card reveal" data-delay="2">
