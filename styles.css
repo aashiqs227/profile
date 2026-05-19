@@ -148,17 +148,18 @@ a { color: inherit; text-decoration: none; }
 .splash-meta {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  flex-wrap: wrap;
+  gap: 14px 22px;
   align-items: center;
   margin-top: 56px;
-  font-size: 14px;
+  font-size: clamp(16px, 1.5vw, 19px);
   font-weight: var(--fw-medium);
-  letter-spacing: 0.02em;
-  color: rgba(243, 240, 238, 0.65);
+  letter-spacing: 0.01em;
+  color: rgba(243, 240, 238, 0.78);
   opacity: 0;
   animation: rise 700ms var(--ease-out) 1.6s forwards;
 }
-.splash-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(243,240,238,0.45); }
+.splash-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(243,240,238,0.5); }
 
 .splash-enter {
   position: absolute;
@@ -1045,6 +1046,7 @@ footer.site h3 {
   letter-spacing: -0.025em;
   line-height: 1;
   text-wrap: balance;
+  color: var(--color-white);
 }
 footer.site h3 em { font-style: italic; font-weight: 400; color: var(--color-light-signal-orange); }
 footer.site .label {
@@ -1107,3 +1109,226 @@ main.app {
   transition: opacity 600ms var(--ease-out) 200ms;
 }
 main.app.ready { opacity: 1; }
+
+/* =====================================================================
+   MOBILE RESPONSIVE — comprehensive overhaul
+   ===================================================================== */
+
+/* ---------------- Tablet (≤960px) ---------------- */
+@media (max-width: 960px) {
+  :root {
+    --section-pad: 72px;
+    --gutter-page: 32px;
+  }
+
+  /* Section head — stack heading + lede */
+  .section-head { margin-bottom: 48px; gap: 16px; }
+  .section-head .row { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .section-head h2 { max-width: 16ch; }
+  .section-head .lede { max-width: 56ch; }
+
+  /* Hero */
+  .hero h1 { font-size: clamp(40px, 8vw, 72px); margin-top: 24px; }
+  .hero-lede { font-size: 16.5px; margin-top: 22px; max-width: 100%; }
+
+  /* Versatility */
+  .versatility-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Tools */
+  .tools-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tool-group { padding: 26px 24px; min-height: 0; }
+
+  /* Education */
+  .edu-card { padding: 28px 26px; }
+
+  /* CTA band */
+  .cta-band { padding: 56px 40px; }
+
+  /* Work cards */
+  .work-card { padding: 32px 28px; border-radius: 28px; }
+  .work-card h3 { font-size: 23px; }
+
+  /* Footer */
+  footer.site { padding: 72px 0 36px; }
+  footer.site .row { padding-bottom: 48px; }
+}
+
+/* ---------------- Mobile (≤720px) ---------------- */
+@media (max-width: 720px) {
+  :root {
+    --section-pad: 64px;
+    --gutter-page: 24px;
+  }
+
+  /* Nav pill — compact, just brand + CTA */
+  .nav-pill {
+    top: 16px;
+    width: calc(100% - 32px);
+    max-width: 420px;
+    padding: 8px 8px 8px 18px;
+    gap: 12px;
+    justify-content: space-between;
+  }
+  .nav-brand { font-size: 14px; }
+  .nav-cta { padding: 9px 16px; font-size: 12.5px; }
+
+  /* Hero */
+  .hero { padding: 130px 0 56px; }
+  .hero .watermark { top: 90px; font-size: clamp(96px, 28vw, 180px); }
+  .hero-grid { gap: 40px; }
+  .hero h1 { font-size: clamp(38px, 11vw, 64px); }
+  .hero-stats {
+    margin-top: 56px;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+    padding-top: 28px;
+  }
+  .stat-num { font-size: clamp(36px, 11vw, 56px); }
+  .stat-label { font-size: 12.5px; }
+  .portrait-wrap { width: 240px; height: 240px; }
+  .portrait-initials { font-size: 80px; }
+
+  /* Section headings tighten */
+  .section-head h2 { font-size: clamp(30px, 8vw, 44px); }
+  .section-head .lede { font-size: 16px; }
+
+  /* Versatility */
+  .versatility .watermark { font-size: clamp(72px, 22vw, 140px); top: 30px; right: -30px; }
+  .video-frame { border-radius: 24px; margin-top: 32px; }
+  .video-caption { font-size: 14px; }
+  .versatility-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 48px; }
+  .v-tile { padding: 24px 22px; border-radius: 20px; }
+
+  /* About — stack */
+  .about-text p { font-size: 16px; }
+  .trait { padding: 22px 0; }
+  .trait h4 { font-size: 17px; }
+  .trait p { font-size: 14px; }
+
+  /* Work cards */
+  .work-grid { gap: 12px; }
+  .work-card { padding: 26px 24px; border-radius: 24px; gap: 12px; }
+  .work-card h3 { font-size: 21px; }
+  .work-desc { font-size: 14px; }
+  .chip { font-size: 11.5px; padding: 6px 12px; }
+
+  /* Skills strip */
+  .skills-strip { gap: 8px; margin-top: 24px; }
+  .skills-strip span { font-size: 12.5px; padding: 8px 16px; }
+
+  /* Analytics feature */
+  .analytics-feature { padding: 28px 24px; border-radius: 28px; gap: 28px; }
+  .dashboard-mock { padding: 18px; border-radius: 18px; }
+  .dashboard-mock .tile .val { font-size: 19px; }
+
+  /* Tools */
+  .tools-grid { grid-template-columns: 1fr; }
+
+  /* Timeline */
+  .timeline { margin-top: 16px; }
+  .tl-row { padding: 24px 0; gap: 10px; }
+  .tl-date { font-size: 12px; }
+  .tl-role { font-size: 21px; }
+  .tl-company { font-size: 13.5px; margin-bottom: 8px; }
+  .tl-desc { font-size: 14px; }
+
+  /* Education on home */
+  .edu-grid { grid-template-columns: 1fr; gap: 12px; }
+  .edu-card { padding: 26px 24px; border-radius: 24px; }
+  .edu-card h4 { font-size: 19px; }
+
+  /* CTA band */
+  .cta-band {
+    padding: 48px 28px;
+    border-radius: 32px;
+    gap: 32px;
+  }
+  .cta-band h2 { font-size: clamp(26px, 7.5vw, 38px); }
+  .cta-band .cta-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+  .cta-band .ink-pill,
+  .cta-band .ghost-pill { justify-content: center; padding: 14px 22px; font-size: 14.5px; }
+
+  /* Footer */
+  footer.site { padding: 64px 0 32px; }
+  footer.site .row { gap: 36px; padding-bottom: 36px; }
+  footer.site h3 { font-size: clamp(30px, 9vw, 44px); }
+  footer.site .col p,
+  footer.site .col a { font-size: 15px; }
+  footer.site .bottom { margin-top: 28px; font-size: 12px; }
+
+  /* Watermarks — pull in so they don't crash sections */
+  .watermark { font-size: clamp(72px, 22vw, 160px) !important; }
+
+  /* Global orbit — shrink so it doesn't dominate */
+  .global-orbit { width: 360px; height: 360px; right: -160px; opacity: 0.22; }
+
+  /* Splash refinements */
+  .splash-eyebrow { margin-bottom: 32px; font-size: 11px; }
+  .splash-tagline { font-size: clamp(48px, 14vw, 88px); }
+  .splash-meta { margin-top: 36px; gap: 10px 14px; }
+  .splash-enter { bottom: 32px; gap: 10px; font-size: 11px; }
+  .splash-enter-circle { width: 48px; height: 48px; }
+}
+
+/* ---------------- Small mobile (≤480px) ---------------- */
+@media (max-width: 480px) {
+  :root {
+    --gutter-page: 20px;
+  }
+  .container, .container-narrow { padding: 0 20px; }
+
+  /* Splash — tighten further */
+  .splash-tagline { font-size: clamp(42px, 14vw, 64px); line-height: 0.98; }
+  .splash-meta {
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 28px;
+    font-size: 15px;
+  }
+  .splash-meta .dot { display: none; }
+  .splash-content { padding: 0 20px; }
+
+  /* Hero stats — single column readable */
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+  .stat-label { max-width: none; }
+
+  /* Section heading slightly tighter */
+  .section-head h2 { font-size: clamp(28px, 9vw, 38px); max-width: 18ch; }
+
+  /* Work card */
+  .work-card { padding: 22px 20px; border-radius: 22px; }
+  .work-card h3 { font-size: 19px; line-height: 1.18; }
+
+  /* Versatility v-tile */
+  .v-tile { padding: 22px 20px; }
+  .v-tile h4 { font-size: 16px; }
+
+  /* Tools */
+  .tool-group { padding: 24px 22px; border-radius: 20px; }
+  .tool-group h4 { font-size: 17px; }
+
+  /* CTA band */
+  .cta-band { padding: 40px 24px; border-radius: 28px; }
+
+  /* Footer */
+  footer.site h3 { font-size: clamp(28px, 10vw, 38px); }
+  footer.site .bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
+
+  /* Portrait smaller */
+  .portrait-wrap { width: 200px; height: 200px; }
+  .portrait-initials { font-size: 68px; }
+  .portrait-satellite { width: 44px; height: 44px; font-size: 17px; }
+
+  /* Analytics feature */
+  .analytics-feature { padding: 24px 20px; }
+
+  /* Timeline role text */
+  .tl-role { font-size: 19px; }
+}
+
+/* ---------------- Very narrow (≤360px) ---------------- */
+@media (max-width: 360px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .nav-pill { padding: 7px 7px 7px 14px; }
+  .nav-cta { padding: 8px 12px; font-size: 12px; }
+}
