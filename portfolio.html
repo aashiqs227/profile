@@ -149,7 +149,62 @@
   }
   .frame-video:hover .play { transform: translate(-50%, -50%) scale(1.08); }
 
-  /* ---- Collateral cluster (PDFs, no preview) ---- */
+  /* ---- Formal document showcases (inline page samples) ---- */
+  .doc-show {
+    padding: 40px 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .doc-show:first-of-type { border-top: 0; padding-top: 0; }
+  .doc-show-head { max-width: 64ch; margin-bottom: 28px; }
+  .doc-show-head h3 {
+    font-family: var(--font-display); font-size: clamp(26px, 3vw, 38px); font-weight: var(--fw-medium);
+    letter-spacing: -0.025em; line-height: 1.04; color: var(--color-ink); margin-bottom: 14px; text-wrap: balance;
+  }
+  .doc-show-head p { font-size: 15.5px; line-height: 1.6; color: var(--color-granite); max-width: 60ch; margin-bottom: 20px; }
+  .doc-show-head .work-chips { margin-bottom: 0; }
+  .doc-show-gallery { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .doc-show-rest { display: grid; gap: 14px; }
+  .doc-show[data-rest="2"] .doc-show-rest { grid-template-columns: repeat(2, 1fr); }
+  .doc-show[data-rest="3"] .doc-show-rest { grid-template-columns: repeat(3, 1fr); }
+  .doc-show[data-rest="4"] .doc-show-rest { grid-template-columns: repeat(2, 1fr); }
+  .doc-show[data-rest="0"] .doc-show-rest { display: none; }
+  .doc-page {
+    display: block; width: 100%; padding: 0; margin: 0; background: none; border: 0; cursor: zoom-in;
+    border-radius: 10px; overflow: hidden; transition: transform var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out);
+    box-shadow: var(--shadow-1);
+  }
+  .doc-page:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+  .doc-page img { width: 100%; height: auto; display: block; }
+  .doc-page.hero { border-radius: 14px; box-shadow: var(--shadow-2); }
+  .doc-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .doc-actions .sample-note {
+    font-size: 12px; font-weight: var(--fw-medium); color: var(--color-slate);
+    background: rgba(20,20,19,0.04); padding: 8px 14px; border-radius: 999px; letter-spacing: 0.01em;
+  }
+  .link-btn.ghost { background: transparent; }
+  .link-btn.ghost:hover { background: var(--color-ink); color: var(--color-canvas); }
+
+  /* Lightbox overlay */
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(8,8,8,0.94); z-index: 1000;
+    display: none; align-items: center; justify-content: center; padding: 24px;
+    cursor: zoom-out; backdrop-filter: blur(4px);
+  }
+  .lightbox.open { display: flex; animation: lbIn 220ms var(--ease-out); }
+  .lightbox img {
+    max-width: 96vw; max-height: 92vh; object-fit: contain; border-radius: 6px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5); user-select: none;
+  }
+  .lb-close {
+    position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+    font-size: 18px; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center;
+    transition: background var(--dur-mid) var(--ease-out);
+  }
+  .lb-close:hover { background: rgba(255,255,255,0.16); }
+  @keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ---- Collateral cluster (legacy, kept for any small card use) ---- */
   .collateral { margin-top: 40px; }
   .collateral .work-type { margin-bottom: 20px; }
   .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -186,8 +241,16 @@
     .work-row.flip .work-media { order: 0; }      /* media always on top when stacked */
     .frame-img { max-width: 380px; }
     .doc-grid { grid-template-columns: 1fr; }
+    .doc-show { padding: 32px 0; }
+    .doc-show-head h3 { font-size: clamp(22px, 6vw, 30px); }
+    .doc-show[data-rest="3"] .doc-show-rest,
+    .doc-show[data-rest="4"] .doc-show-rest { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 480px) {
+    .doc-show[data-rest="2"] .doc-show-rest,
+    .doc-show[data-rest="3"] .doc-show-rest,
+    .doc-show[data-rest="4"] .doc-show-rest { grid-template-columns: 1fr; }
+    .lb-close { top: 12px; right: 12px; }
     .doc-card { gap: 16px; padding: 20px; }
     .doc-cover { flex-basis: 72px; width: 72px; }
     .email-scroll { height: 380px; }
@@ -353,7 +416,195 @@
           </div>
         </div>
 
-        <!-- 5 — Home Buyers Event flyer -->
+        <!-- 5 — Save Max Brand Guideline -->
+        <article class="doc-show reveal" data-rest="2">
+          <div class="doc-show-head">
+            <div class="work-type">Brand guideline · Visual identity</div>
+            <h3>Save Max — Visual Identity (Nov 2025)</h3>
+            <p>Complete brand reference book covering logo system, secondary marks, colour palette, typography, stationery, real-estate-specific assets, and brand compliance rules — designed as a definitive guideline document in a luxury black-and-gold treatment.</p>
+            <div class="work-chips"><span class="chip">Brand identity</span><span class="chip">Typography</span><span class="chip">Print</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/brand-guideline/page-01.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/brand-guideline/page-01.jpg" alt="Cover — Visual Identity, Nov 2025" loading="lazy">
+            </button>
+            <div class="doc-show-rest">
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/brand-guideline/page-06.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/brand-guideline/page-06.jpg" alt="Colour palette spread" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/brand-guideline/page-07.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/brand-guideline/page-07.jpg" alt="Typography spread" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <div class="doc-actions">
+            <span class="sample-note">Selected sample pages</span>
+          </div>
+        </article>
+
+        <!-- 6 — Save Max Sponsorship Packages 2026 -->
+        <article class="doc-show reveal" data-rest="2">
+          <div class="doc-show-head">
+            <div class="work-type">Sponsorship deck</div>
+            <h3>Save Max Sundays' — Event Sponsorship Proposal 2026</h3>
+            <p>A long-form sponsorship deck presenting tiered packages, key benefits, and event details for the Save Max Sundays' 2026 series. Black marble and gold treatment carried consistently across every spread.</p>
+            <div class="work-chips"><span class="chip">Deck design</span><span class="chip">Event marketing</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/sponsorship/page-01.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/sponsorship/page-01.jpg" alt="Cover — Event Sponsorship Proposal 2026" loading="lazy">
+            </button>
+            <div class="doc-show-rest">
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/sponsorship/page-07.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/sponsorship/page-07.jpg" alt="Sponsorship packages table" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/sponsorship/page-08.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/sponsorship/page-08.jpg" alt="Sponsorship benefits spread" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <div class="doc-actions">
+            <a class="link-btn" href="assets/portfolio/collateral/savemax-sponsorship-packages-2026.pdf" download>Download full PDF <span class="arrow">↓</span></a>
+            <a class="link-btn ghost" href="viewer.html?doc=sponsorship">View full document <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <!-- 7 — CH7 Support Services Overview -->
+        <article class="doc-show reveal" data-rest="2">
+          <div class="doc-show-head">
+            <div class="work-type">Brokerage overview</div>
+            <h3>CH7 Realty — Support Services Overview</h3>
+            <p>A long-form services overview for CH7 Realty Brokerage — agent-facing positioning, support frameworks, and operational structure designed in a confident corporate aesthetic with bold headlines and a clear visual hierarchy.</p>
+            <div class="work-chips"><span class="chip">Long-form layout</span><span class="chip">Corporate</span><span class="chip">Real estate</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/support-overview/page-01.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/support-overview/page-01.jpg" alt="Cover — CH7 Support Services Overview" loading="lazy">
+            </button>
+            <div class="doc-show-rest">
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/support-overview/page-02.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/support-overview/page-02.jpg" alt="You focus on selling — interior spread" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/support-overview/page-09.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/support-overview/page-09.jpg" alt="Support framework spread" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <div class="doc-actions">
+            <a class="link-btn" href="assets/portfolio/collateral/support-services-overview.pdf" download>Download full PDF <span class="arrow">↓</span></a>
+            <a class="link-btn ghost" href="viewer.html?doc=support-overview">View full document <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <!-- 8 — Enterprise Centre Booklet -->
+        <article class="doc-show reveal" data-rest="2">
+          <div class="doc-show-head">
+            <div class="work-type">Property catalog · Real estate</div>
+            <h3>Enterprise Centre — Commercial property booklet</h3>
+            <p>A real-estate listings catalog featuring premium property highlights, building specifications, and capital improvement details — laid out with prominent imagery, structured data tables, and a confident black-and-gold treatment.</p>
+            <div class="work-chips"><span class="chip">Catalog</span><span class="chip">Commercial RE</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/enterprise-booklet/page-01.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/enterprise-booklet/page-01.jpg" alt="Freehold Office Building cover" loading="lazy">
+            </button>
+            <div class="doc-show-rest">
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/enterprise-booklet/page-02.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/enterprise-booklet/page-02.jpg" alt="Building specifications spread" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/enterprise-booklet/page-04.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/enterprise-booklet/page-04.jpg" alt="Booklet interior spread" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <div class="doc-actions">
+            <a class="link-btn" href="assets/portfolio/collateral/enterprise-centre-booklet.pdf" download>Download full PDF <span class="arrow">↓</span></a>
+            <a class="link-btn ghost" href="viewer.html?doc=enterprise-booklet">View full document <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <!-- 9 — Module 3: Profile Setup + Branding -->
+        <article class="doc-show reveal" data-rest="4">
+          <div class="doc-show-head">
+            <div class="work-type">Course module · Lecture deck</div>
+            <h3>Module 3 — Profile Setup + Branding</h3>
+            <p>A lesson deck from a real-estate social-media course, balancing bold editorial typography with curated imagery and a clear curriculum structure. Designed for screen-share teaching and on-demand viewing.</p>
+            <div class="work-chips"><span class="chip">Editorial</span><span class="chip">Education</span><span class="chip">Social media</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/module-3/page-01.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/module-3/page-01.jpg" alt="Module 3 cover — Profile Setup + Branding" loading="lazy">
+            </button>
+            <div class="doc-show-rest">
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-3/page-03.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-3/page-03.jpg" alt="Module 3 — interior page" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-3/page-04.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-3/page-04.jpg" alt="Module 3 — interior page" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-3/page-08.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-3/page-08.jpg" alt="Module 3 — interior page" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-3/page-10.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-3/page-10.jpg" alt="Thumbnails — Module 3 interior page" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <div class="doc-actions">
+            <span class="sample-note">Selected sample pages</span>
+          </div>
+        </article>
+
+        <!-- 10 — Module 4: Algorithm & Engagement -->
+        <article class="doc-show reveal" data-rest="3">
+          <div class="doc-show-head">
+            <div class="work-type">Course module · Lecture deck</div>
+            <h3>Module 4 — Algorithm &amp; Engagement</h3>
+            <p>A second module from the same social-media course, focused on working with the platform algorithm and driving engagement. Confident editorial layout, generous white space, and disciplined typography.</p>
+            <div class="work-chips"><span class="chip">Editorial</span><span class="chip">Education</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/module-4/page-03.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/module-4/page-03.jpg" alt="Module 4 — Let's start with the algorithm" loading="lazy">
+            </button>
+            <div class="doc-show-rest">
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-4/page-04.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-4/page-04.jpg" alt="Module 4 — interior page" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-4/page-06.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-4/page-06.jpg" alt="Module 4 — interior page" loading="lazy">
+              </button>
+              <button class="doc-page" type="button" data-img="assets/portfolio/samples/module-4/page-08.jpg" aria-label="Open full page">
+                <img src="assets/portfolio/samples/module-4/page-08.jpg" alt="Respond to comments — Module 4 interior page" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <div class="doc-actions">
+            <span class="sample-note">Selected sample pages</span>
+          </div>
+        </article>
+
+        <!-- 11 — Introduction deck -->
+        <article class="doc-show reveal" data-rest="0">
+          <div class="doc-show-head">
+            <div class="work-type">Course intro</div>
+            <h3>Social Media for Real Estate Agents — opening</h3>
+            <p>Title page for the same real-estate social-media course — bold display typography paired with a confident editorial style, setting the tone for the modules that follow.</p>
+            <div class="work-chips"><span class="chip">Editorial</span><span class="chip">Cover design</span></div>
+          </div>
+          <div class="doc-show-gallery">
+            <button class="doc-page hero" type="button" data-img="assets/portfolio/samples/introduction/page-01.jpg" aria-label="Open full page">
+              <img src="assets/portfolio/samples/introduction/page-01.jpg" alt="Introduction — Social Media for Real Estate Agents" loading="lazy">
+            </button>
+            <div class="doc-show-rest"></div>
+          </div>
+          <div class="doc-actions">
+            <a class="link-btn" href="assets/portfolio/collateral/introduction.pdf" download>Download full PDF <span class="arrow">↓</span></a>
+            <a class="link-btn ghost" href="viewer.html?doc=introduction">View full document <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <!-- 12 — Home Buyers Event flyer -->
         <div class="work-row reveal">
           <div class="work-media">
             <div class="frame-img portrait">
@@ -369,7 +620,7 @@
           </div>
         </div>
 
-        <!-- 6 — Transaction Desk social graphic -->
+        <!-- 13 — Transaction Desk social graphic -->
         <div class="work-row flip reveal">
           <div class="work-media">
             <div class="frame-img square">
@@ -385,7 +636,7 @@
           </div>
         </div>
 
-        <!-- 7 — VirtuCore IT flyer -->
+        <!-- 14 — VirtuCore IT flyer -->
         <div class="work-row reveal">
           <div class="work-media">
             <div class="frame-img portrait">
@@ -398,49 +649,6 @@
             <h3>VirtuCore — service flyer</h3>
             <p>A one-page IT-services flyer pairing a confident headline with a structured benefits list and contact call-to-action — built to match the VirtuCore brand system end to end.</p>
             <div class="work-chips"><span class="chip">Print/digital</span><span class="chip">Branding</span></div>
-          </div>
-        </div>
-
-        <!-- 8 — Formal collateral (PDFs) -->
-        <div class="collateral reveal">
-          <div class="work-type">Formal collateral</div>
-          <div class="doc-grid">
-            <a class="doc-card" href="viewer.html?doc=enterprise-booklet">
-              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Enterprise Centre Booklet</span></div>
-              <div class="doc-info">
-                <div class="doc-type">Brochure</div>
-                <h4>Enterprise Centre Booklet</h4>
-                <p>A multi-page booklet laid out for a consistent brand system across every spread.</p>
-                <span class="open">View document <span class="arrow">→</span></span>
-              </div>
-            </a>
-            <a class="doc-card" href="viewer.html?doc=support-overview">
-              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Support Services Overview</span></div>
-              <div class="doc-info">
-                <div class="doc-type">Guide</div>
-                <h4>Support Services Overview</h4>
-                <p>An extensive services overview — structured, navigable, and on-brand throughout.</p>
-                <span class="open">View document <span class="arrow">→</span></span>
-              </div>
-            </a>
-            <a class="doc-card" href="viewer.html?doc=sponsorship">
-              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Sponsorship Packages 2026</span></div>
-              <div class="doc-info">
-                <div class="doc-type">Presentation</div>
-                <h4>Sponsorship Packages 2026</h4>
-                <p>A comprehensive sponsorship deck presenting tiers and benefits clearly.</p>
-                <span class="open">View document <span class="arrow">→</span></span>
-              </div>
-            </a>
-            <a class="doc-card" href="viewer.html?doc=introduction">
-              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Introduction</span></div>
-              <div class="doc-info">
-                <div class="doc-type">Brochure</div>
-                <h4>Introduction &amp; capabilities</h4>
-                <p>An introduction and capabilities piece with a clean typographic layout.</p>
-                <span class="open">View document <span class="arrow">→</span></span>
-              </div>
-            </a>
           </div>
         </div>
 
@@ -493,6 +701,43 @@
 
 </main>
 
+<!-- ===== Lightbox for design samples ===== -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Page preview">
+  <button class="lb-close" type="button" aria-label="Close preview">✕</button>
+  <img alt="" id="lbImg">
+</div>
+
 <script src="motion.js"></script>
+<script>
+  (function () {
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lbImg');
+    function open(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+    document.querySelectorAll('.doc-page').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var src = btn.dataset.img;
+        if (!src) return;
+        var img = btn.querySelector('img');
+        open(src, img ? img.alt : '');
+      });
+    });
+    lb.addEventListener('click', close);
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('open')) close();
+    });
+  })();
+</script>
 </body>
 </html>
