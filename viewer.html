@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document — Aashiq Siddik</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* =================================================================
+     In-site document viewer — site chrome wraps the embedded file
+     ================================================================= */
+  html, body { background: var(--color-canvas); }
+  body.viewer { display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+
+  .v-bar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 20px;
+    padding: 16px clamp(20px, 4vw, 48px);
+    background: var(--color-ink); color: var(--color-canvas);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .v-bar .v-brand {
+    font-weight: var(--fw-bold); font-size: 15px; letter-spacing: -0.01em; color: var(--color-canvas);
+    white-space: nowrap;
+  }
+  .v-bar .v-brand .dot { color: var(--color-light-signal-orange); }
+  .v-bar .v-title {
+    flex: 1; min-width: 0; text-align: center;
+    font-size: 13.5px; font-weight: var(--fw-medium); color: rgba(243,240,238,0.7);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .v-bar .v-back {
+    display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+    font-size: 13px; font-weight: var(--fw-medium); color: var(--color-canvas);
+    border: 1.5px solid rgba(243,240,238,0.4); border-radius: 999px; padding: 8px 16px;
+    transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out);
+  }
+  .v-bar .v-back:hover { background: rgba(255,255,255,0.08); border-color: var(--color-light-signal-orange); }
+  .v-bar .v-back .arrow { color: var(--color-light-signal-orange); }
+
+  .v-stage { flex: 1; display: flex; background: #2b2b2a; min-height: 78vh; }
+  .v-stage iframe { width: 100%; height: 100%; min-height: 78vh; border: 0; display: block; background: #2b2b2a; }
+
+  .v-sub {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 20px; background: var(--color-canvas-lifted);
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 12.5px; color: var(--color-slate);
+  }
+  .v-sub a { color: var(--color-ink); font-weight: var(--fw-medium); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .v-sub a:hover { color: var(--color-light-signal-orange); }
+  .v-sub a .arrow { color: var(--color-light-signal-orange); }
+
+  @media (max-width: 600px) {
+    .v-bar .v-title { display: none; }
+  }
+</style>
+</head>
+<body class="viewer">
+
+  <header class="v-bar">
+    <a class="v-brand" href="index.html">Aashiq Siddik<span class="dot">.</span></a>
+    <span class="v-title" id="vTitle">Document</span>
+    <a class="v-back" href="portfolio.html"><span class="arrow">←</span> Back to portfolio</a>
+  </header>
+
+  <div class="v-sub">
+    <span>Viewing inside the site —</span>
+    <a id="openNew" href="#" target="_blank" rel="noopener">open in a new tab <span class="arrow">↗</span></a>
+  </div>
+
+  <main class="v-stage">
+    <iframe id="vFrame" title="Document viewer" loading="eager"></iframe>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site">
+    <div class="container">
+      <div class="row">
+        <div>
+          <p class="label">Get in touch</p>
+          <h3>Hand me something. <em>I'll figure it out.</em></h3>
+        </div>
+        <div class="col">
+          <p class="label">Contact</p>
+          <a href="mailto:aashiqs227@gmail.com">aashiqs227@gmail.com</a>
+          <a href="tel:+16479796295">(647) 979-6295</a>
+          <p class="sub">Toronto, ON</p>
+        </div>
+        <div class="col">
+          <p class="label">Elsewhere</p>
+          <a href="https://www.linkedin.com/in/aashiq-siddik" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="portfolio.html">← Back to portfolio</a>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Aashiq Siddik · Digital marketing · Campaign management · Operations</span>
+        <span>Toronto, ON</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Whitelisted documents — only these keys resolve (no arbitrary src injection)
+    var DOCS = {
+      'email-eagles':       { src: 'assets/portfolio/email/eagles/email.html',                 title: 'Luxury estate listing campaign — HTML email' },
+      'enterprise-booklet': { src: 'assets/portfolio/collateral/enterprise-centre-booklet.pdf', title: 'Enterprise Centre Booklet' },
+      'support-overview':   { src: 'assets/portfolio/collateral/support-services-overview.pdf', title: 'Support Services Overview' },
+      'sponsorship':        { src: 'assets/portfolio/collateral/savemax-sponsorship-packages-2026.pdf', title: 'Sponsorship Packages 2026' },
+      'introduction':       { src: 'assets/portfolio/collateral/introduction.pdf',             title: 'Introduction & capabilities' }
+    };
+    var key = new URLSearchParams(window.location.search).get('doc');
+    var doc = DOCS[key];
+    if (!doc) {
+      window.location.replace('portfolio.html');
+    } else {
+      document.getElementById('vTitle').textContent = doc.title;
+      document.title = doc.title + ' — Aashiq Siddik';
+      document.getElementById('vFrame').src = doc.src;
+      document.getElementById('openNew').href = doc.src;
+    }
+  </script>
+</body>
+</html>
