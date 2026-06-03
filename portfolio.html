@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aashiq Siddik — Design Portfolio</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* =================================================================
+     Page-specific styles — Portfolio (single flowing feed)
+     ================================================================= */
+
+  /* Page header (shared pattern with full-profile) */
+  .page-header {
+    padding: 200px 0 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header .watermark { top: 80px; left: -40px; }
+  .page-header .back {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: var(--fw-bold); letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase; color: var(--color-ink); margin-bottom: 32px;
+    transition: color var(--dur-mid) var(--ease-out);
+  }
+  .page-header .back:hover { color: var(--color-light-signal-orange); }
+  .page-header .back .arrow { color: var(--color-light-signal-orange); }
+  .page-header h1 {
+    font-family: var(--font-display); font-size: clamp(56px, 8vw, 128px);
+    font-weight: var(--fw-medium); line-height: 0.96; letter-spacing: -0.035em;
+    color: var(--color-ink); max-width: 16ch; text-wrap: balance; margin-bottom: 28px;
+    position: relative; z-index: 1;
+  }
+  .page-header h1 em { font-style: italic; font-weight: 400; color: var(--color-light-signal-orange); }
+  .page-header .lede {
+    font-size: 19px; line-height: 1.5; color: var(--color-granite);
+    max-width: 56ch; position: relative; z-index: 1;
+  }
+
+  /* ---- The feed: alternating showcase rows ---- */
+  .feed { display: flex; flex-direction: column; gap: 96px; padding: 24px 0 8px; }
+  .work-row {
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center;
+  }
+  .work-row.flip .work-media { order: 2; }
+  .work-media { min-width: 0; }
+  .work-caption { min-width: 0; }
+
+  .work-type {
+    font-size: 11px; font-weight: var(--fw-bold); letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase; color: var(--color-light-signal-orange);
+    display: inline-flex; align-items: center; gap: 9px; margin-bottom: 14px;
+  }
+  .work-type::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--color-light-signal-orange); }
+  .work-caption h3 {
+    font-family: var(--font-display); font-size: clamp(26px, 3vw, 38px); font-weight: var(--fw-medium);
+    letter-spacing: -0.025em; line-height: 1.04; color: var(--color-ink); margin-bottom: 14px; text-wrap: balance;
+  }
+  .work-caption p { font-size: 15.5px; line-height: 1.6; color: var(--color-granite); max-width: 48ch; margin-bottom: 20px; }
+  .work-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+
+  .link-btn {
+    display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: var(--fw-medium);
+    color: var(--color-ink); border: 1.5px solid var(--color-ink); border-radius: 999px; padding: 11px 22px;
+    transition: background var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out);
+  }
+  .link-btn:hover { background: var(--color-ink); color: var(--color-canvas); }
+  .link-btn .arrow { color: var(--color-light-signal-orange); }
+
+  /* ---- Media frames ---- */
+  /* Browser frame (websites) */
+  .frame-browser { background: #0e0e0d; border-radius: 22px; padding: 12px 12px 0; box-shadow: var(--shadow-2); }
+  .frame-browser .bar { display: flex; align-items: center; gap: 14px; padding: 4px 4px 12px; }
+  .frame-browser .dots { display: flex; gap: 7px; }
+  .frame-browser .dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.22); }
+  .frame-browser .dots span:first-child { background: var(--color-light-signal-orange); }
+  .frame-browser .url {
+    flex: 1; font-size: 12px; font-weight: var(--fw-medium); color: rgba(243,240,238,0.7);
+    background: rgba(255,255,255,0.07); border-radius: 999px; padding: 6px 16px; text-align: center;
+  }
+
+  /* Generic shot area (img + placeholder fallback) */
+  .shot {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(243,115,56,0.18), transparent 55%),
+      linear-gradient(135deg, #1c2b4a 0%, #0f1830 100%);
+  }
+  .shot.wide { aspect-ratio: 16 / 10; border-radius: 0 0 12px 12px; }
+  .frame-browser .shot { border-radius: 0; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .shot .ph {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; text-align: center; padding: 24px; color: rgba(243,240,238,0.85);
+  }
+  .shot .ph .lbl { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--color-light-signal-orange); }
+  .shot .ph .u { font-family: var(--font-display); font-size: clamp(18px, 2.4vw, 26px); font-weight: var(--fw-medium); letter-spacing: -0.02em; color: var(--color-canvas); }
+  .shot .ph .hint { font-size: 11.5px; color: rgba(243,240,238,0.5); }
+
+  /* Image frame (flyers / social) */
+  .frame-img {
+    border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-2); position: relative;
+    background: linear-gradient(135deg, #1c2b4a 0%, #0f1830 100%); max-width: 460px; margin: 0 auto;
+  }
+  .frame-img.portrait { aspect-ratio: 4 / 5; }
+  .frame-img.square { aspect-ratio: 1 / 1; }
+  .frame-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .frame-img .ph {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; text-align: center; padding: 24px; color: rgba(243,240,238,0.85);
+  }
+  .frame-img .ph .lbl { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--color-light-signal-orange); }
+  .frame-img .ph .u { font-family: var(--font-display); font-size: 20px; font-weight: var(--fw-medium); color: var(--color-canvas); }
+  .frame-img .ph .hint { font-size: 11.5px; color: rgba(243,240,238,0.5); }
+
+  /* Device frame (email) */
+  .frame-device {
+    background: #0e0e0d; border-radius: 26px; padding: 12px; box-shadow: var(--shadow-2);
+    max-width: 360px; margin: 0 auto; width: 100%;
+  }
+  .frame-device .bar { display: flex; gap: 7px; padding: 6px 6px 12px; }
+  .frame-device .bar span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.22); }
+  .frame-device .bar span:first-child { background: var(--color-light-signal-orange); }
+  .email-scroll { height: 440px; overflow: hidden; border-radius: 16px; background: #fff; position: relative; }
+  .email-scroll img { width: 100%; display: block; }
+  .email-scroll::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(transparent, rgba(255,255,255,0.95)); }
+
+  /* Video frame (screenshot + play, links out) */
+  .frame-video {
+    display: block; position: relative; border-radius: 22px; overflow: hidden; aspect-ratio: 16 / 9;
+    box-shadow: var(--shadow-2); background:
+      radial-gradient(circle at 70% 30%, rgba(243,115,56,0.22), transparent 55%),
+      linear-gradient(135deg, #14223f 0%, #0c1224 100%);
+    transition: transform var(--dur-mid) var(--ease-out);
+  }
+  .frame-video:hover { transform: translateY(-3px); }
+  .frame-video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .frame-video .ph {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; text-align: center; padding: 24px; color: rgba(243,240,238,0.6);
+  }
+  .frame-video .ph .hint { font-size: 11.5px; }
+  .frame-video .play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 76px; height: 76px; border-radius: 50%; background: var(--color-light-signal-orange);
+    display: flex; align-items: center; justify-content: center; color: #0e0e0d; font-size: 26px; padding-left: 5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35); transition: transform var(--dur-mid) var(--ease-out); z-index: 2;
+  }
+  .frame-video:hover .play { transform: translate(-50%, -50%) scale(1.08); }
+
+  /* ---- Collateral cluster (PDFs, no preview) ---- */
+  .collateral { margin-top: 40px; }
+  .collateral .work-type { margin-bottom: 20px; }
+  .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .doc-card {
+    display: flex; gap: 22px; align-items: stretch; background: var(--color-canvas-lifted);
+    border-radius: 24px; padding: 26px; transition: transform var(--dur-mid) var(--ease-out), background var(--dur-mid) var(--ease-out);
+  }
+  .doc-card:hover { transform: translateY(-3px); background: var(--color-white); }
+  .doc-cover {
+    flex: 0 0 84px; width: 84px; border-radius: 10px; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--color-ink) 0%, #283a5e 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; box-shadow: var(--shadow-1);
+  }
+  .doc-cover::before {
+    content: ''; position: absolute; top: 0; right: 0; border-width: 0 20px 20px 0; border-style: solid;
+    border-color: var(--color-canvas-lifted) var(--color-canvas-lifted) transparent transparent;
+  }
+  .doc-cover .badge { position: absolute; top: 10px; left: 10px; font-size: 9px; font-weight: var(--fw-bold); letter-spacing: 0.08em; color: var(--color-light-signal-orange); }
+  .doc-cover .ct { font-size: 10.5px; line-height: 1.25; font-weight: var(--fw-medium); color: var(--color-canvas); }
+  .doc-info { display: flex; flex-direction: column; }
+  .doc-type { font-size: 11px; font-weight: var(--fw-bold); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--color-light-signal-orange); margin-bottom: 8px; }
+  .doc-info h4 { font-family: var(--font-display); font-size: 18px; font-weight: var(--fw-medium); letter-spacing: -0.015em; color: var(--color-ink); margin-bottom: 6px; line-height: 1.15; }
+  .doc-info p { font-size: 13.5px; line-height: 1.5; color: var(--color-granite); margin-bottom: 12px; }
+  .doc-info .open { margin-top: auto; font-size: 13px; font-weight: var(--fw-bold); color: var(--color-ink); letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 7px; }
+  .doc-info .open .arrow { color: var(--color-light-signal-orange); }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 900px) {
+    .page-header { padding: 140px 0 48px; }
+    .page-header h1 { font-size: clamp(40px, 11vw, 72px); }
+    .page-header .lede { font-size: 16.5px; }
+    .feed { gap: 64px; }
+    .work-row { grid-template-columns: 1fr; gap: 28px; }
+    .work-row.flip .work-media { order: 0; }      /* media always on top when stacked */
+    .frame-img { max-width: 380px; }
+    .doc-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .doc-card { gap: 16px; padding: 20px; }
+    .doc-cover { flex-basis: 72px; width: 72px; }
+    .email-scroll { height: 380px; }
+    .frame-video .play { width: 62px; height: 62px; font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     SPLASH
+     ===================================================================== -->
+<div class="splash" id="splash" data-screen-label="00 Splash">
+  <div class="splash-arcs" aria-hidden="true">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+      <path d="M -200 750 Q 800 100 1800 750" style="--len: 2400; --delay: 0.2s"/>
+      <path d="M -200 500 Q 800 200 1800 500" class="ghost" style="--len: 2000; --delay: 0s"/>
+      <circle cx="220" cy="450" r="280" style="--len: 1800; --delay: 0.6s" class="dim"/>
+      <circle cx="1380" cy="450" r="280" style="--len: 1800; --delay: 0.8s" class="dim"/>
+      <circle cx="220" cy="170" r="3" class="dot" style="--delay: 1.4s"/>
+      <circle cx="1380" cy="730" r="3" class="dot" style="--delay: 1.6s"/>
+    </svg>
+  </div>
+  <div class="splash-content">
+    <div class="splash-eyebrow">Portfolio · Selected work</div>
+    <h1 class="splash-tagline">
+      <span class="line" data-stagger>Selected</span>
+      <span class="line" data-stagger><span class="italic">work.</span></span>
+    </h1>
+    <div class="splash-meta">
+      <span>Websites</span>
+      <span class="dot"></span>
+      <span>Email</span>
+      <span class="dot"></span>
+      <span>Video</span>
+      <span class="dot"></span>
+      <span>Print &amp; social</span>
+    </div>
+  </div>
+  <button class="splash-enter" id="enterBtn" type="button" aria-label="Enter">
+    <span class="splash-enter-circle"><span class="arrow">↓</span></span>
+    <span>Scroll or click to begin</span>
+  </button>
+</div>
+
+
+<!-- =====================================================================
+     FLOATING NAV
+     ===================================================================== -->
+<nav class="nav-pill" id="nav" aria-label="Primary navigation">
+  <a class="nav-brand" href="index.html">Aashiq Siddik<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="full-profile.html">Full profile</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:aashiqs227@gmail.com">Get in touch →</a>
+</nav>
+
+
+<main class="app" id="app">
+  <div id="top"></div>
+
+  <div class="global-orbit" aria-hidden="true">
+    <svg viewBox="0 0 600 600">
+      <circle cx="300" cy="300" r="290"/>
+      <circle cx="300" cy="300" r="220" style="opacity:.5"/>
+      <circle cx="300" cy="300" r="150" style="opacity:.3"/>
+    </svg>
+  </div>
+
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-header" data-screen-label="01 Header">
+    <span class="watermark" data-dir="left" data-range="240">Portfolio</span>
+    <div class="container">
+      <a class="back reveal" href="index.html"><span class="arrow">←</span> Back to home</a>
+      <h1 class="reveal" data-delay="1">Work that means <em>business.</em></h1>
+      <p class="lede reveal" data-delay="2">A scroll through selected design and development work — full websites, HTML email, video, print, and social — so you can see the range and how each piece is built.</p>
+    </div>
+  </section>
+
+
+  <!-- ===== WORK FEED ===== -->
+  <section id="work" class="lifted" data-screen-label="02 Work">
+    <div class="container">
+      <div class="feed">
+
+        <!-- 1 — VirtuCore website (full build) -->
+        <div class="work-row reveal">
+          <div class="work-media">
+            <div class="frame-browser">
+              <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">vcstestdomain.com</div></div>
+              <div class="shot wide">
+                <div class="ph"><span class="lbl">Live website</span><span class="u">VirtuCore Solutions</span><span class="hint">screenshot pending</span></div>
+                <img src="assets/portfolio/shots/virtucore.png" alt="VirtuCore Solutions website" loading="lazy" onerror="this.remove()">
+              </div>
+            </div>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">Website · Full build</div>
+            <h3>VirtuCore Solutions</h3>
+            <p>End-to-end build of a managed-IT services site for small and medium businesses — information architecture, design, copy direction, and front-to-back development. Designed and developed entirely by me.</p>
+            <div class="work-chips"><span class="chip">Web design</span><span class="chip">Development</span><span class="chip">UX</span></div>
+            <a class="link-btn" href="https://vcstestdomain.com/" target="_blank" rel="noopener">Visit live site <span class="arrow">↗</span></a>
+          </div>
+        </div>
+
+        <!-- 2 — Email campaign -->
+        <div class="work-row flip reveal">
+          <div class="work-media">
+            <div class="frame-device">
+              <div class="bar"><span></span><span></span><span></span></div>
+              <div class="email-scroll">
+                <img src="assets/portfolio/email/eagles/images/bfe57f2601a0f510be2f7420be9c9396.jpg" alt="Luxury estate home email — hero" loading="lazy">
+              </div>
+            </div>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">HTML email · Real estate</div>
+            <h3>Luxury estate listing campaign</h3>
+            <p>A property feature email designed and hand-coded as responsive HTML — bold hero, supporting imagery, and clear calls to action — built to render cleanly across major email clients and on mobile.</p>
+            <div class="work-chips"><span class="chip">Responsive HTML</span><span class="chip">Campaign design</span></div>
+            <a class="link-btn" href="assets/portfolio/email/eagles/email.html" target="_blank" rel="noopener">View full email <span class="arrow">↗</span></a>
+          </div>
+        </div>
+
+        <!-- 3 — Team ETO website -->
+        <div class="work-row reveal">
+          <div class="work-media">
+            <div class="frame-browser">
+              <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">teameto.com</div></div>
+              <div class="shot wide">
+                <div class="ph"><span class="lbl">Live website</span><span class="u">Team ETO</span><span class="hint">screenshot pending</span></div>
+                <img src="assets/portfolio/shots/teameto.png" alt="Team ETO website" loading="lazy" onerror="this.remove()">
+              </div>
+            </div>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">Website · Design &amp; content</div>
+            <h3>Team ETO</h3>
+            <p>Design and content for an established wholesale eyewear brand — on-page assets, banners, promotional modules, and a full video library supporting the e-commerce and B2B experience.</p>
+            <div class="work-chips"><span class="chip">Web design</span><span class="chip">Content</span><span class="chip">E-commerce</span></div>
+            <a class="link-btn" href="https://www.teameto.com/" target="_blank" rel="noopener">Visit live site <span class="arrow">↗</span></a>
+          </div>
+        </div>
+
+        <!-- 4 — Video walkthrough -->
+        <div class="work-row flip reveal">
+          <div class="work-media">
+            <a class="frame-video" href="https://www.teameto.com/video/library#2" target="_blank" rel="noopener" aria-label="Watch the B2B portal walkthrough">
+              <div class="ph"><span class="hint">video thumbnail pending</span></div>
+              <img src="assets/portfolio/shots/video-walkthrough.png" alt="B2B portal walkthrough video" loading="lazy" onerror="this.remove()">
+              <span class="play">▶</span>
+            </a>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">Video production</div>
+            <h3>B2B portal walkthrough</h3>
+            <p>A step-by-step tutorial video walking users through the B2B ordering portal — scripted, screen-captured, and edited by me. Part of a wider video library produced for the brand.</p>
+            <div class="work-chips"><span class="chip">Editing</span><span class="chip">Tutorial</span></div>
+            <a class="link-btn" href="https://www.teameto.com/video/library#2" target="_blank" rel="noopener">Watch the video <span class="arrow">↗</span></a>
+          </div>
+        </div>
+
+        <!-- 5 — Home Buyers Event flyer -->
+        <div class="work-row reveal">
+          <div class="work-media">
+            <div class="frame-img portrait">
+              <div class="ph"><span class="lbl">Flyer</span><span class="u">Home Buyers Event</span><span class="hint">image pending</span></div>
+              <img src="assets/portfolio/social/home-buyers-event.png" alt="Home Buyers Event flyer" loading="lazy" onerror="this.remove()">
+            </div>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">Flyer · Event</div>
+            <h3>Home Buyers Event</h3>
+            <p>A first-time buyers &amp; investors seminar flyer — strong typographic hierarchy, a clear value headline, and event details laid out for fast scanning across print and digital.</p>
+            <div class="work-chips"><span class="chip">Print/digital</span><span class="chip">Real estate</span></div>
+          </div>
+        </div>
+
+        <!-- 6 — Transaction Desk social graphic -->
+        <div class="work-row flip reveal">
+          <div class="work-media">
+            <div class="frame-img square">
+              <div class="ph"><span class="lbl">Social</span><span class="u">Transaction Desk</span><span class="hint">image pending</span></div>
+              <img src="assets/portfolio/social/transaction-desk.png" alt="Transaction Desk webinar social graphic" loading="lazy" onerror="this.remove()">
+            </div>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">Social graphic</div>
+            <h3>Webinar promo — Transaction Desk</h3>
+            <p>A square social post promoting a virtual training session — bold title lockup, date treatment, and a clean brand frame sized for Instagram and LinkedIn feeds.</p>
+            <div class="work-chips"><span class="chip">Social media</span><span class="chip">Event promo</span></div>
+          </div>
+        </div>
+
+        <!-- 7 — VirtuCore IT flyer -->
+        <div class="work-row reveal">
+          <div class="work-media">
+            <div class="frame-img portrait">
+              <div class="ph"><span class="lbl">Flyer</span><span class="u">We'll handle the I.T.</span><span class="hint">image pending</span></div>
+              <img src="assets/portfolio/social/virtucore-flyer.png" alt="VirtuCore IT services flyer" loading="lazy" onerror="this.remove()">
+            </div>
+          </div>
+          <div class="work-caption">
+            <div class="work-type">Flyer · Services</div>
+            <h3>VirtuCore — service flyer</h3>
+            <p>A one-page IT-services flyer pairing a confident headline with a structured benefits list and contact call-to-action — built to match the VirtuCore brand system end to end.</p>
+            <div class="work-chips"><span class="chip">Print/digital</span><span class="chip">Branding</span></div>
+          </div>
+        </div>
+
+        <!-- 8 — Formal collateral (PDFs) -->
+        <div class="collateral reveal">
+          <div class="work-type">Formal collateral</div>
+          <div class="doc-grid">
+            <a class="doc-card" href="assets/portfolio/collateral/enterprise-centre-booklet.pdf" target="_blank" rel="noopener">
+              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Enterprise Centre Booklet</span></div>
+              <div class="doc-info">
+                <div class="doc-type">Brochure</div>
+                <h4>Enterprise Centre Booklet</h4>
+                <p>A multi-page booklet laid out for a consistent brand system across every spread.</p>
+                <span class="open">Open PDF <span class="arrow">↗</span></span>
+              </div>
+            </a>
+            <a class="doc-card" href="assets/portfolio/collateral/support-services-overview.pdf" target="_blank" rel="noopener">
+              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Support Services Overview</span></div>
+              <div class="doc-info">
+                <div class="doc-type">Guide</div>
+                <h4>Support Services Overview</h4>
+                <p>An extensive services overview — structured, navigable, and on-brand throughout.</p>
+                <span class="open">Open PDF <span class="arrow">↗</span></span>
+              </div>
+            </a>
+            <a class="doc-card" href="assets/portfolio/collateral/savemax-sponsorship-packages-2026.pdf" target="_blank" rel="noopener">
+              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Sponsorship Packages 2026</span></div>
+              <div class="doc-info">
+                <div class="doc-type">Presentation</div>
+                <h4>Sponsorship Packages 2026</h4>
+                <p>A comprehensive sponsorship deck presenting tiers and benefits clearly.</p>
+                <span class="open">Open PDF <span class="arrow">↗</span></span>
+              </div>
+            </a>
+            <a class="doc-card" href="assets/portfolio/collateral/introduction.pdf" target="_blank" rel="noopener">
+              <div class="doc-cover"><span class="badge">PDF</span><span class="ct">Introduction</span></div>
+              <div class="doc-info">
+                <div class="doc-type">Brochure</div>
+                <h4>Introduction &amp; capabilities</h4>
+                <p>An introduction and capabilities piece with a clean typographic layout.</p>
+                <span class="open">Open PDF <span class="arrow">↗</span></span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== CTA BAND ===== -->
+  <section data-screen-label="03 CTA">
+    <div class="container">
+      <div class="cta-band reveal">
+        <span class="watermark">Connect</span>
+        <h2>Like what you see? Let's talk about what I can build for <em>your team.</em></h2>
+        <div class="cta-actions">
+          <a class="ink-pill" href="mailto:aashiqs227@gmail.com">Get in touch <span class="arrow">→</span></a>
+          <a class="ghost-pill" href="index.html">← Back to home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site" id="contact" data-screen-label="04 Footer">
+    <div class="container">
+      <div class="row">
+        <div>
+          <p class="label">Get in touch</p>
+          <h3 class="reveal">Hand me something. <em>I'll figure it out.</em></h3>
+        </div>
+        <div class="col">
+          <p class="label">Contact</p>
+          <a href="mailto:aashiqs227@gmail.com">aashiqs227@gmail.com</a>
+          <a href="tel:+16479796295">(647) 979-6295</a>
+          <p class="sub">Toronto, ON</p>
+        </div>
+        <div class="col">
+          <p class="label">Elsewhere</p>
+          <a href="https://www.linkedin.com/in/aashiq-siddik" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="full-profile.html">Full profile →</a>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Aashiq Siddik · Digital marketing · Campaign management · Operations</span>
+        <span>Toronto, ON</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script src="motion.js"></script>
+</body>
+</html>
