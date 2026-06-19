@@ -8,8 +8,14 @@
   const app = document.getElementById('app');
   const enterBtn = document.getElementById('enterBtn');
 
-  // Lock scroll until user dismisses splash
-  document.body.classList.add('splash-locked');
+  // If a splash exists, lock scroll until it's dismissed.
+  // Otherwise (splash removed), reveal content and nav immediately.
+  if (splash) {
+    document.body.classList.add('splash-locked');
+  } else {
+    if (app) app.classList.add('ready');
+    if (nav) requestAnimationFrame(() => nav.classList.add('visible'));
+  }
 
   function dismissSplash() {
     if (!splash || splash.classList.contains('exiting')) return;
